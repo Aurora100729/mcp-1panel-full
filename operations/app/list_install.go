@@ -2,26 +2,33 @@ package app
 
 import (
 	"context"
+
+	"github.com/modelcontextprotocol/go-sdk/mcp"
+
 	"github.com/1Panel-dev/mcp-1panel/operations/types"
 	"github.com/1Panel-dev/mcp-1panel/utils"
-
-	"github.com/mark3labs/mcp-go/mcp"
 )
 
 const (
 	ListInstalledApps = "list_installed_apps"
 )
 
-var ListInstalledAppsTool = mcp.NewTool(
+var ListInstalledAppsTool = mcp.NewServerTool[ListInstalledAppsInput, any](
 	ListInstalledApps,
-	mcp.WithDescription("list installed apps"),
+	"list installed apps",
+	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[ListInstalledAppsInput]) (*mcp.CallToolResultFor[any], error) {
+		req := &types.PageRequest{
+			Page:     1,
+			PageSize: 500,
+		}
+		appListRes := &types.AppInstalledListResponse{}
+		result, err := utils.NewPanelClient("POST", "/apps/installed/search", utils.WithPayload(req)).Request(appListRes)
+		if result != nil {
+			result.StructuredContent = appListRes
+		}
+		return result, err
+	},
 )
 
-func ListInstalledAppsHandle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-	req := &types.PageRequest{
-		Page:     1,
-		PageSize: 500,
-	}
-	appListRes := &types.AppInstalledListResponse{}
-	return utils.NewPanelClient("POST", "/apps/installed/search", utils.WithPayload(req)).Request(appListRes)
+type ListInstalledAppsInput struct {
 }

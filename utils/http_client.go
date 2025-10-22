@@ -15,7 +15,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/mark3labs/mcp-go/mcp"
+	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
 var (
@@ -308,38 +308,80 @@ func (p *PanelClient) Request(object any) (*mcp.CallToolResult, error) {
 	if err != nil {
 		switch {
 		case IsAuthError(err):
-			return mcp.NewToolResultText("Authentication failed: Please check your Panel access token"), err
+			return &mcp.CallToolResult{
+				Content: []mcp.Content{
+					&mcp.TextContent{Text: "Authentication failed: Please check your Panel access token"},
+				},
+				IsError: true,
+			}, err
 		case IsNetworkError(err):
-			return mcp.NewToolResultText("Network error: Unable to connect to Panel API"), err
+			return &mcp.CallToolResult{
+				Content: []mcp.Content{
+					&mcp.TextContent{Text: "Network error: Unable to connect to Panel API"},
+				},
+				IsError: true,
+			}, err
 		case IsAPIError(err):
 			var panelErr *PanelError
 			errors.As(err, &panelErr)
-			return mcp.NewToolResultText(fmt.Sprintf("API error (%d): %s", panelErr.Code, panelErr.Details)), err
+			return &mcp.CallToolResult{
+				Content: []mcp.Content{
+					&mcp.TextContent{Text: fmt.Sprintf("API error (%d): %s", panelErr.Code, panelErr.Details)},
+				},
+				IsError: true,
+			}, err
 		default:
-			return mcp.NewToolResultText(err.Error()), err
+			return &mcp.CallToolResult{
+				Content: []mcp.Content{
+					&mcp.TextContent{Text: err.Error()},
+				},
+				IsError: true,
+			}, err
 		}
 	}
 
 	if object == nil {
-		return mcp.NewToolResultText("Operation completed successfully"), nil
+		return &mcp.CallToolResult{
+			Content: []mcp.Content{
+				&mcp.TextContent{Text: "Operation completed successfully"},
+			},
+		}, nil
 	}
 
 	body, err := p.GetRespBody()
 	if err != nil {
-		return mcp.NewToolResultText(fmt.Sprintf("Failed to read response body: %s", err.Error())),
-			NewInternalError(err)
+		return &mcp.CallToolResult{
+			Content: []mcp.Content{
+				&mcp.TextContent{Text: fmt.Sprintf("Failed to read response body: %s", err.Error())},
+			},
+			IsError: true,
+		}, NewInternalError(err)
 	}
 
 	if err = json.Unmarshal(body, object); err != nil {
 		errorMessage := fmt.Sprintf("Failed to parse response: %v", err)
-		return mcp.NewToolResultText(errorMessage), NewInternalError(errors.New(errorMessage))
+		return &mcp.CallToolResult{
+			Content: []mcp.Content{
+				&mcp.TextContent{Text: errorMessage},
+			},
+			IsError: true,
+		}, NewInternalError(errors.New(errorMessage))
 	}
 
 	result, err := json.MarshalIndent(object, "", "  ")
 	if err != nil {
-		return mcp.NewToolResultText(fmt.Sprintf("Failed to format response: %s", err.Error())),
-			NewInternalError(err)
+		return &mcp.CallToolResult{
+			Content: []mcp.Content{
+				&mcp.TextContent{Text: fmt.Sprintf("Failed to format response: %s", err.Error())},
+			},
+			IsError: true,
+		}, NewInternalError(err)
 	}
 
-	return mcp.NewToolResultText(string(result)), nil
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{Text: string(result)},
+		},
+		StructuredContent: object,
+	}, nil
 }

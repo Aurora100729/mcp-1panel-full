@@ -2,27 +2,33 @@ package ssl
 
 import (
 	"context"
+
+	"github.com/modelcontextprotocol/go-sdk/mcp"
+
 	"github.com/1Panel-dev/mcp-1panel/operations/types"
 	"github.com/1Panel-dev/mcp-1panel/utils"
-
-	"github.com/mark3labs/mcp-go/mcp"
 )
 
 const (
 	ListSSLs = "list_ssls"
 )
 
-var ListSSLsTool = mcp.NewTool(
+var ListSSLsTool = mcp.NewServerTool[ListSSLsInput, any](
 	ListSSLs,
-	mcp.WithDescription("list ssls"),
+	"list ssls",
+	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[ListSSLsInput]) (*mcp.CallToolResultFor[any], error) {
+		req := &types.PageRequest{
+			Page:     1,
+			PageSize: 500,
+		}
+		listWebsiteSSLRes := &types.ListWebsiteSSLRes{}
+		result, err := utils.NewPanelClient("POST", "/websites/ssl/search", utils.WithPayload(req)).Request(listWebsiteSSLRes)
+		if result != nil {
+			result.StructuredContent = listWebsiteSSLRes
+		}
+		return result, err
+	},
 )
 
-func ListSSLHandle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-	req := &types.PageRequest{
-		Page:     1,
-		PageSize: 500,
-	}
-	client := utils.NewPanelClient("POST", "/websites/ssl/search", utils.WithPayload(req))
-	listWebsiteSSLRes := &types.ListWebsiteSSLRes{}
-	return client.Request(listWebsiteSSLRes)
+type ListSSLsInput struct {
 }

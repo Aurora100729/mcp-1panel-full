@@ -2,21 +2,29 @@ package system
 
 import (
 	"context"
+
+	"github.com/modelcontextprotocol/go-sdk/mcp"
+
 	"github.com/1Panel-dev/mcp-1panel/operations/types"
 	"github.com/1Panel-dev/mcp-1panel/utils"
-
-	"github.com/mark3labs/mcp-go/mcp"
 )
 
 const (
 	GetSystemInfo = "get_system_info"
 )
 
-var GetSystemInfoTool = mcp.NewTool(GetSystemInfo, mcp.WithDescription(
-	"show host system information, The unit of diskSize is bytes"))
+var GetSystemInfoTool = mcp.NewServerTool[GetSystemInfoInput, any](
+	GetSystemInfo,
+	"show host system information, The unit of diskSize is bytes",
+	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[GetSystemInfoInput]) (*mcp.CallToolResultFor[any], error) {
+		client := utils.NewPanelClient("GET", "/dashboard/base/os")
+		osInfo := &types.OsInfoRes{}
+		result, err := client.Request(osInfo)
+		if result != nil {
+			result.StructuredContent = osInfo
+		}
+		return result, err
+	},
+)
 
-func GetSystemInfoHandle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-	client := utils.NewPanelClient("GET", "/dashboard/base/os")
-	osInfo := &types.OsInfoRes{}
-	return client.Request(osInfo)
-}
+type GetSystemInfoInput struct{}

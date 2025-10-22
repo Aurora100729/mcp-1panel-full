@@ -17,12 +17,18 @@ type ListWebsiteRequest struct {
 }
 
 type CreateWebsiteRequest struct {
-	PrimaryDomain  string `json:"primaryDomain"`
+	Domains []WebsiteDomain `json:"domains"`
 	Alias          string `json:"alias"`
 	Type           string `json:"type"`
 	WebsiteGroupID uint   `json:"websiteGroupId"`
 	Proxy          string `json:"proxy"`
 	AppType        string `json:"appType"`
+}
+
+type WebsiteDomain struct {
+	Domain string `json:"domain" validate:"required"`
+	Port   int    `json:"port"`
+	SSL    bool   `json:"ssl"`
 }
 
 type GroupRequest struct {

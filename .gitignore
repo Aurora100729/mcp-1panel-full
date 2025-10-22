@@ -31,3 +31,4 @@ __debug*
 # Dependency directories
 build
 logs
+.gocache

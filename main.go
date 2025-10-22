@@ -1,19 +1,24 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
+	"log"
+	"net/http"
+	"net/url"
+	"os"
+	"path/filepath"
+	"strings"
+
+	"github.com/modelcontextprotocol/go-sdk/mcp"
+
 	"github.com/1Panel-dev/mcp-1panel/operations/app"
 	"github.com/1Panel-dev/mcp-1panel/operations/database"
 	"github.com/1Panel-dev/mcp-1panel/operations/ssl"
 	"github.com/1Panel-dev/mcp-1panel/operations/system"
 	"github.com/1Panel-dev/mcp-1panel/operations/website"
 	"github.com/1Panel-dev/mcp-1panel/utils"
-	"log"
-	"os"
-	"path/filepath"
-
-	"github.com/mark3labs/mcp-go/server"
 )
 
 var (
@@ -39,50 +44,117 @@ func setupLogger() (*os.File, error) {
 	return logFile, nil
 }
 
-func newMCPServer() *server.MCPServer {
-	return server.NewMCPServer(
+func newMCPServer() *mcp.Server {
+	return mcp.NewServer(
 		"github.com/1Panel-dev/mcp-1panel",
 		Version,
-		server.WithToolCapabilities(true),
-		server.WithLogging(),
+		nil,
 	)
 }
 
-func addTools(s *server.MCPServer) {
-	s.AddTool(system.GetSystemInfoTool, system.GetSystemInfoHandle)
-	s.AddTool(system.GetDashboardInfoTool, system.GetDashboardInfoHandle)
-	s.AddTool(website.ListWebsitesTool, website.ListWebsiteHandle)
-	s.AddTool(website.CreateWebsiteTool, website.CreateWebsiteHandle)
-	s.AddTool(ssl.ListSSLsTool, ssl.ListSSLHandle)
-	s.AddTool(app.InstallMySQLTool, app.InstallMySQLHandle)
-	s.AddTool(app.InstallOpenRestyTool, app.InstallOpenRestyHandle)
-	s.AddTool(app.ListInstalledAppsTool, app.ListInstalledAppsHandle)
-	s.AddTool(ssl.CreateSSLTool, ssl.CreateSSLHandle)
-	s.AddTool(database.ListDatabasesTool, database.ListDatabasesHandle)
-	s.AddTool(database.CreateDatabaseTool, database.CreateDatabaseHandle)
+func addTools(s *mcp.Server) {
+	s.AddTools(
+		system.GetSystemInfoTool,
+		system.GetDashboardInfoTool,
+		website.ListWebsitesTool,
+		website.CreateWebsiteTool,
+		ssl.ListSSLsTool,
+		ssl.CreateSSLTool,
+		app.InstallMySQLTool,
+		app.InstallOpenRestyTool,
+		app.ListInstalledAppsTool,
+		database.ListDatabasesTool,
+		database.CreateDatabaseTool,
+	)
 }
 
 func runServer(transport string, addr string) error {
 	mcpServer := newMCPServer()
 	addTools(mcpServer)
 
-	if transport == "sse" {
-		port, err := utils.GetPortFromAddr(addr)
-		if err != nil {
-			return err
-		}
-		log.Printf("SSE server listening on :%s", port)
-		sseServer := server.NewSSEServer(mcpServer, server.WithBaseURL(addr))
-		if err := sseServer.Start(fmt.Sprintf(":%s", port)); err != nil {
-			log.Fatalf("Server error: %v", err)
-		}
-	} else {
+	log.Printf("Starting MCP server with transport=%s addr=%s", transport, addr)
+
+	switch strings.ToLower(transport) {
+	case "stdio":
+		ctx := context.Background()
 		log.Printf("Run Stdio server")
-		if err := server.ServeStdio(mcpServer); err != nil {
-			log.Fatalf("Server error: %v", err)
+		stdioTransport := mcp.NewStdioTransport()
+		if err := mcpServer.Run(ctx, stdioTransport); err != nil {
+			return fmt.Errorf("server error: %w", err)
 		}
+		return nil
+	case "sse":
+		return serveSSE(addr, mcpServer)
+	case "streamable", "streamable-http":
+		return serveStreamableHTTP(addr, mcpServer)
+	default:
+		return fmt.Errorf("unsupported transport %q", transport)
 	}
-	return nil
+}
+
+func serveSSE(addr string, server *mcp.Server) error {
+	handler := mcp.NewSSEHandler(func(*http.Request) *mcp.Server { return server })
+	return serveHTTPTransport("SSE", addr, handler)
+}
+
+func serveStreamableHTTP(addr string, server *mcp.Server) error {
+	handler := mcp.NewStreamableHTTPHandler(func(*http.Request) *mcp.Server { return server }, nil)
+	return serveHTTPTransport("Streamable HTTP", addr, handler)
+}
+
+func serveHTTPTransport(label, addr string, handler http.Handler) error {
+	listenAddr, basePath, displayAddr, err := parseHTTPAddr(addr)
+	if err != nil {
+		return err
+	}
+
+	mux := http.NewServeMux()
+	mux.Handle(basePath, handler)
+	if basePath != "/" && !strings.HasSuffix(basePath, "/") {
+		mux.Handle(basePath+"/", handler)
+	}
+
+	log.Printf("%s transport listening on %s", label, displayAddr)
+	return http.ListenAndServe(listenAddr, mux)
+}
+
+func parseHTTPAddr(raw string) (listenAddr, basePath, displayAddr string, err error) {
+	if raw == "" {
+		return "", "", "", fmt.Errorf("addr must not be empty")
+	}
+
+	parsedInput := raw
+	if !strings.Contains(parsedInput, "://") {
+		parsedInput = "http://" + parsedInput
+	}
+
+	u, err := url.Parse(parsedInput)
+	if err != nil {
+		return "", "", "", fmt.Errorf("invalid addr %q: %w", raw, err)
+	}
+
+	host := u.Host
+	if host == "" {
+		return "", "", "", fmt.Errorf("addr %q must include host and port (e.g. http://localhost:8000)", raw)
+	}
+
+	path := u.Path
+	if path == "" {
+		path = "/"
+	}
+	if !strings.HasPrefix(path, "/") {
+		path = "/" + path
+	}
+
+	display := fmt.Sprintf("%s://%s%s", defaultScheme(u.Scheme), host, path)
+	return host, path, display, nil
+}
+
+func defaultScheme(s string) string {
+	if s == "" {
+		return "http"
+	}
+	return s
 }
 
 func main() {
@@ -92,8 +164,8 @@ func main() {
 		host        string
 		addr        string
 	)
-	flag.StringVar(&transport, "transport", "stdio", "Transport type (stdio or sse)")
-	flag.StringVar(&addr, "addr", "http://localhost:8000", "The base URL for mcp Server")
+	flag.StringVar(&transport, "transport", "stdio", "Transport type (stdio, sse, streamable-http)")
+	flag.StringVar(&addr, "addr", "http://localhost:8000", "Base URL (host, port, optional path) for HTTP transports")
 	flag.StringVar(&accessToken, "token", "", "1Panel api key")
 	flag.StringVar(&host, "host", "", "1Panel host (example:http://127.0.0.1:9999)")
 	flag.Parse()

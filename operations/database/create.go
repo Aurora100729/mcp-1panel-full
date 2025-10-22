@@ -4,80 +4,92 @@ import (
 	"context"
 	"encoding/base64"
 	"errors"
+
+	"github.com/modelcontextprotocol/go-sdk/mcp"
+
 	"github.com/1Panel-dev/mcp-1panel/operations/types"
 	"github.com/1Panel-dev/mcp-1panel/utils"
-
-	"github.com/mark3labs/mcp-go/mcp"
 )
 
 const (
 	CreateDatabase = "create_database"
 )
 
-var CreateDatabaseTool = mcp.NewTool(
+var CreateDatabaseTool = mcp.NewServerTool[CreateDatabaseInput, any](
 	CreateDatabase,
-	mcp.WithDescription("create a database by type name and password"),
-	mcp.WithString("database_type", mcp.Description("installed database app type, support mysql and postgresql"), mcp.DefaultString("mysql"), mcp.Required()),
-	mcp.WithString("database", mcp.Description("installed database app name"), mcp.DefaultString(""), mcp.Required()),
-	mcp.WithString("name", mcp.Description("database name"), mcp.DefaultString(""), mcp.Required()),
-	mcp.WithString("username", mcp.Description("database username"), mcp.DefaultString("")),
-	mcp.WithString("password", mcp.Description("database password"), mcp.DefaultString("")),
+	"create a database by type name and password",
+	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[CreateDatabaseInput]) (*mcp.CallToolResultFor[any], error) {
+		input := params.Arguments
+		if input.Database == "" {
+			err := errors.New("database name is required")
+			return &mcp.CallToolResult{
+				Content: []mcp.Content{&mcp.TextContent{Text: err.Error()}},
+				IsError: true,
+			}, err
+		}
+		if input.DatabaseType == "" {
+			err := errors.New("database type is required")
+			return &mcp.CallToolResult{
+				Content: []mcp.Content{&mcp.TextContent{Text: err.Error()}},
+				IsError: true,
+			}, err
+		}
+		if input.DatabaseType != "mysql" && input.DatabaseType != "postgresql" {
+			err := errors.New("database type is invalid, support mysql and postgresql")
+			return &mcp.CallToolResult{
+				Content: []mcp.Content{&mcp.TextContent{Text: err.Error()}},
+				IsError: true,
+			}, err
+		}
+		if input.Name == "" {
+			err := errors.New("name is required")
+			return &mcp.CallToolResult{
+				Content: []mcp.Content{&mcp.TextContent{Text: err.Error()}},
+				IsError: true,
+			}, err
+		}
+
+		password := input.Password
+		if password == "" {
+			password = utils.GetRandomStr(12)
+		}
+		encodedPassword := base64.StdEncoding.EncodeToString([]byte(password))
+
+		username := input.Username
+		if username == "" {
+			username = input.Name
+		}
+
+		createReq := &types.CreateDatabaseRequest{
+			Database: input.Database,
+			Password: encodedPassword,
+			Type:     input.DatabaseType,
+			Name:     input.Name,
+			From:     "local",
+			Username: username,
+		}
+		var createURL string
+		if input.DatabaseType == "mysql" {
+			createURL = "/databases"
+			createReq.Format = "utf8mb4"
+			createReq.Permission = "%"
+		} else {
+			createURL = "/databases/pg"
+			createReq.Format = "UTF8"
+		}
+		res := &types.Response{}
+		result, err := utils.NewPanelClient("POST", createURL, utils.WithPayload(createReq)).Request(res)
+		if result != nil {
+			result.StructuredContent = res
+		}
+		return result, err
+	},
 )
 
-func CreateDatabaseHandle(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-	var (
-		database     string
-		password     string
-		name         string
-		databaseType string
-		username     string
-	)
-	if request.Params.Arguments["database"] == nil {
-		return nil, errors.New("database name is required")
-	}
-	database = request.Params.Arguments["database"].(string)
-	if request.Params.Arguments["database_type"] == nil {
-		return nil, errors.New("database type is required")
-	}
-	databaseType = request.Params.Arguments["database_type"].(string)
-	if databaseType != "mysql" && databaseType != "postgresql" {
-		return nil, errors.New("database type is invalid, support mysql and postgresql")
-	}
-	if request.Params.Arguments["name"] == nil {
-		return nil, errors.New("name is required")
-	}
-	name = request.Params.Arguments["name"].(string)
-	if request.Params.Arguments["password"] == nil {
-		password = utils.GetRandomStr(12)
-	} else {
-		password = request.Params.Arguments["password"].(string)
-	}
-	encodedPassword := base64.StdEncoding.EncodeToString([]byte(password))
-
-	if request.Params.Arguments["username"] == nil {
-		username = name
-	} else {
-		username = request.Params.Arguments["username"].(string)
-	}
-
-	createReq := &types.CreateDatabaseRequest{
-		Database: database,
-		Password: encodedPassword,
-		Type:     databaseType,
-		Name:     name,
-		From:     "local",
-		Username: username,
-	}
-	var createUrl string
-	if databaseType == "mysql" {
-		createUrl = "/databases"
-		createReq.Format = "utf8mb4"
-		createReq.Permission = "%"
-	} else {
-		createUrl = "/databases/pg"
-		createReq.Format = "UTF8"
-	}
-	client := utils.NewPanelClient("POST", createUrl, utils.WithPayload(createReq))
-	res := &types.Response{}
-	return client.Request(res)
+type CreateDatabaseInput struct {
+	DatabaseType string `json:"database_type" jsonschema:"installed database app type, support mysql and postgresql"`
+	Database     string `json:"database" jsonschema:"installed database app name"`
+	Name         string `json:"name" jsonschema:"database name"`
+	Username     string `json:"username,omitempty" jsonschema:"database username"`
+	Password     string `json:"password,omitempty" jsonschema:"database password"`
 }
