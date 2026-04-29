@@ -36,6 +36,10 @@
 
 </div>
 
+<!-- ════════════════════════ ANIMATED RAINBOW LINE ════════════════════════ -->
+
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%" height="3"/>
+
 <br/>
 
 <!-- ═══════════════════════════════════════════════════════════════════
@@ -44,12 +48,22 @@
 
 <div align="center">
 
+<img src="https://user-images.githubusercontent.com/74038190/212750147-854a394f-fee9-4080-9770-78a4b7ece53f.gif" width="60" />
+
 ```diff
 + "Don't click. Don't type commands. Just describe what you want."
 - A new paradigm for server administration — conversational, intentional, magical.
 ```
 
+<a href="https://github.com/Aurora100729/mcp-1panel-full">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=16&pause=1000&color=B57EDC&center=true&vCenter=true&width=600&lines=%E2%9C%A6+conversational+%E2%80%A2+intentional+%E2%80%A2+magical+%E2%9C%A6" />
+</a>
+
 </div>
+
+<br/>
+
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%" height="3"/>
 
 <br/>
 
@@ -93,15 +107,23 @@ Traditional server management means juggling SSH terminals, browser tabs, doc pa
                               TECH STACK
      ═══════════════════════════════════════════════════════════════════ -->
 
-<h2 align="center">⚔️ &nbsp; Built With</h2>
+<h2 align="center">
+  <img src="https://user-images.githubusercontent.com/74038190/216655822-0c750cf3-21f9-4ac5-869b-ec3e6b1a72d6.gif" width="32" /> &nbsp; Built With
+</h2>
 
 <div align="center">
 
 <img src="https://skillicons.dev/icons?i=go,docker,linux,nginx,redis,mysql,postgres,bash&perline=8" />
 
-<sub><i>The languages and infrastructure this project speaks fluently.</i></sub>
+<br/><br/>
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=400&size=14&pause=1000&color=8B949E&center=true&vCenter=true&width=600&lines=The+languages+and+infrastructure+this+project+speaks+fluently." />
 
 </div>
+
+<br/>
+
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%" height="3"/>
 
 <br/>
 
@@ -132,7 +154,9 @@ Traditional server management means juggling SSH terminals, browser tabs, doc pa
                               TOOL CATALOG
      ═══════════════════════════════════════════════════════════════════ -->
 
-<h2>🧰 Tool Catalog</h2>
+<h2>
+  <img src="https://user-images.githubusercontent.com/74038190/216122041-518ac897-8d92-4c6b-9b3f-ca01dcaf38ee.png" width="28" /> &nbsp; Tool Catalog
+</h2>
 
 <details>
 <summary><b>📊 Click to expand the full toolset (24 categories · 90+ tools)</b></summary>
@@ -177,7 +201,12 @@ Traditional server management means juggling SSH terminals, browser tabs, doc pa
                               QUICK START
      ═══════════════════════════════════════════════════════════════════ -->
 
-<h2>🚀 Quick Start</h2>
+<h2>
+  ⚡ &nbsp; Quick Start
+</h2>
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&pause=1000&color=00C896&center=true&vCenter=true&width=900&lines=%24+go+build+-o+mcp-1panel-full+.;%24+.%2Fmcp-1panel-full+--token+YOUR_KEY+--host+http%3A%2F%2F127.0.0.1%3A9999;%E2%9C%93+listening+on+stdio+%E2%80%A2+90%2B+tools+ready" />
+
 
 ### 1️⃣ Build from source
 
@@ -323,9 +352,14 @@ docker run -d --name mcp-1panel \
                               SSH REMOTE EXECUTION
      ═══════════════════════════════════════════════════════════════════ -->
 
-<h2>⚡ SSH Remote Execution</h2>
+<h2>
+  <img src="https://user-images.githubusercontent.com/74038190/216122069-5b8169d7-1d8e-4a13-b245-a8e4176c99f8.png" width="28" /> &nbsp; SSH Remote Execution
+</h2>
 
 > The crown jewel of this server — a single tool that lets your AI run anything on remote hosts.
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&pause=1500&color=FFD700&width=900&lines=ssh+ubuntu%4049.232.205.139+%22df+-h+%26%26+uptime%22;%E2%9C%93+exit%3D0+%E2%80%A2+stdout+captured+%E2%80%A2+structured+JSON+returned;%E2%9C%A6+password+%E2%80%A2+key+%E2%80%A2+passphrase+%E2%80%A2+kbd-interactive" />
+
 
 <table>
 <tr>
@@ -387,9 +421,16 @@ Plus structured JSON: `{ host, user, port, command, stdout, stderr, exitCode }`.
                               EXAMPLES
      ═══════════════════════════════════════════════════════════════════ -->
 
-<h2>💬 Real-World Conversations</h2>
+<h2>
+  💬 &nbsp; Real-World Conversations
+</h2>
 
 > *Watch how natural language unfolds into precise tool calls.*
+
+<div align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=15&pause=1500&color=58A6FF&center=true&vCenter=true&width=720&lines=You+talk.+The+AI+listens.+Tools+do+the+work.;Six+stories.+Six+commands.+Zero+terminals." />
+</div>
+
 
 <table>
 <tr>
@@ -680,9 +721,19 @@ Released under **GNU General Public License v3.0** — see [LICENSE](LICENSE).
                               STAR HISTORY
      ═══════════════════════════════════════════════════════════════════ -->
 
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%" height="3"/>
+
+<br/>
+
 <div align="center">
 
-<h2>⭐ Star History</h2>
+<h2>
+  ⭐ &nbsp; Star History
+</h2>
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=14&pause=1000&color=FFD700&center=true&vCenter=true&width=520&lines=%E2%98%85+Every+star+is+a+vote+of+confidence+%E2%98%85;%E2%98%85+Help+more+folks+discover+this+project+%E2%98%85" />
+
+<br/><br/>
 
 <a href="https://www.star-history.com/#Aurora100729/mcp-1panel-full&Date">
   <picture>
@@ -705,10 +756,16 @@ Released under **GNU General Public License v3.0** — see [LICENSE](LICENSE).
 
 <div align="center">
 
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%" height="3"/>
+
+<br/>
+
 ```diff
 @@  Conversations > Commands.  Intent > Syntax.  AI > Toil.  @@
 + Built with care · Open to all · Made for the curious
 ```
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=400&size=13&pause=2000&color=8B949E&center=true&vCenter=true&width=640&lines=%E2%9C%A6+Crafted+with+%E2%99%A5+by+Aurora+%E2%9C%A6;%E2%9C%A6+Built+for+humans+who+talk+to+machines+%E2%9C%A6" />
 
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,50:16213e,100:0f3460&height=140&section=footer" />
 
