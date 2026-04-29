@@ -1,7 +1,7 @@
 # mcp-1panel-full
 
 [![Go](https://img.shields.io/badge/Go-1.25-00ADD8?logo=go)](https://go.dev/)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
 [![MCP](https://img.shields.io/badge/Model%20Context%20Protocol-1.0-purple)](https://modelcontextprotocol.io/)
 
 **深度优化版 1Panel MCP Server** — 让 AI 助手（Claude / Windsurf / Cursor）通过自然语言全面操控你的 1Panel 服务器。
@@ -405,4 +405,6 @@ transport error: transport closed
 
 ## License
 
-Apache License 2.0 — 详见 [LICENSE](LICENSE)
+GNU General Public License v3.0 — 详见 [LICENSE](LICENSE)
+
+本项目基于 GPL-3.0 协议开源。任何修改、分发、衍生作品必须以相同协议开源并保留版权声明。
