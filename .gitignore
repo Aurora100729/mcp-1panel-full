@@ -33,4 +33,7 @@ build
 logs
 .gocache
 mcp-1panel-full.exe
-mcp-1panel-full
+mcp-1panel-fullssh_key.pem
+stderr.log
+*.pem
+*.key
