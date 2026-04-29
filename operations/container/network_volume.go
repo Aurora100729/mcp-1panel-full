@@ -16,8 +16,8 @@ var ListNetworksTool = mcp.NewServerTool[ListNetworksInput, any](
 			"page":     1,
 			"pageSize": 500,
 			"name":     params.Arguments.Name,
-			"orderBy":  "created_at",
-			"order":    "null",
+			"orderBy":  "name",
+			"order":    "ascending",
 		}
 		var result interface{}
 		client := utils.NewPanelClient("POST", "/containers/network/search", utils.WithPayload(payload))
@@ -84,8 +84,8 @@ var ListVolumesTool = mcp.NewServerTool[ListVolumesInput, any](
 			"page":     1,
 			"pageSize": 500,
 			"name":     params.Arguments.Name,
-			"orderBy":  "created_at",
-			"order":    "null",
+			"orderBy":  "name",
+			"order":    "ascending",
 		}
 		var result interface{}
 		client := utils.NewPanelClient("POST", "/containers/volume/search", utils.WithPayload(payload))

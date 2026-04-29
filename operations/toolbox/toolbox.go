@@ -13,7 +13,7 @@ var GetDNSTool = mcp.NewServerTool[GetDNSInput, any](
 	"Get or update DNS nameserver configuration",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[GetDNSInput]) (*mcp.CallToolResultFor[any], error) {
 		var result interface{}
-		client := utils.NewPanelClient("GET", "/toolbox/dns/search")
+		client := utils.NewPanelClient("POST", "/toolbox/device/conf", utils.WithPayload(map[string]interface{}{"name": "DNS"}))
 		return client.Request(&result)
 	},
 )
@@ -28,7 +28,7 @@ var UpdateDNSTool = mcp.NewServerTool[UpdateDNSInput, any](
 			"dns": params.Arguments.DNS,
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/toolbox/dns/update", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/toolbox/device/update/conf", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )
@@ -42,7 +42,7 @@ var GetHostsTool = mcp.NewServerTool[GetHostsInput, any](
 	"Get /etc/hosts file content",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[GetHostsInput]) (*mcp.CallToolResultFor[any], error) {
 		var result interface{}
-		client := utils.NewPanelClient("GET", "/toolbox/hosts")
+		client := utils.NewPanelClient("POST", "/toolbox/device/conf", utils.WithPayload(map[string]interface{}{"name": "Hosts"}))
 		return client.Request(&result)
 	},
 )
@@ -57,7 +57,7 @@ var UpdateHostsTool = mcp.NewServerTool[UpdateHostsInput, any](
 			"content": params.Arguments.Content,
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/toolbox/hosts/update", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/toolbox/device/update/host", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )
@@ -71,7 +71,7 @@ var GetSwapTool = mcp.NewServerTool[GetSwapInput, any](
 	"Get swap configuration status",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[GetSwapInput]) (*mcp.CallToolResultFor[any], error) {
 		var result interface{}
-		client := utils.NewPanelClient("GET", "/toolbox/swap")
+		client := utils.NewPanelClient("POST", "/toolbox/device/base")
 		return client.Request(&result)
 	},
 )
@@ -89,7 +89,7 @@ var SwapOperateTool = mcp.NewServerTool[SwapOperateInput, any](
 			"size":    input.Size,
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/toolbox/swap/operate", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/toolbox/device/update/swap", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )
@@ -105,7 +105,7 @@ var GetTimezoneTool = mcp.NewServerTool[GetTimezoneInput, any](
 	"Get current system timezone and NTP configuration",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[GetTimezoneInput]) (*mcp.CallToolResultFor[any], error) {
 		var result interface{}
-		client := utils.NewPanelClient("GET", "/toolbox/time/option")
+		client := utils.NewPanelClient("GET", "/toolbox/device/zone/options")
 		return client.Request(&result)
 	},
 )
@@ -149,7 +149,7 @@ var ClamAVScanTool = mcp.NewServerTool[ClamAVScanInput, any](
 			"path": params.Arguments.Path,
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/toolbox/clam/operate", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/toolbox/clam/handle", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )

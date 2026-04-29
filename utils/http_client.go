@@ -19,9 +19,8 @@ import (
 )
 
 var (
-	accessToken string
-	apiBase     string
-	timestamp   string
+	rawToken string
+	apiBase  string
 )
 
 func md5Sum(data string) string {
@@ -31,8 +30,13 @@ func md5Sum(data string) string {
 }
 
 func SetAccessToken(token string) {
-	timestamp = strconv.FormatInt(time.Now().Unix(), 10)
-	accessToken = md5Sum("1panel" + token + timestamp)
+	rawToken = token
+}
+
+func generateAuth() (string, string) {
+	ts := strconv.FormatInt(time.Now().Unix(), 10)
+	hashed := md5Sum("1panel" + rawToken + ts)
+	return hashed, ts
 }
 
 func SetHost(host string) {
@@ -40,14 +44,16 @@ func SetHost(host string) {
 }
 
 func GetAccessToken() string {
-	if accessToken != "" {
-		return accessToken
+	if rawToken != "" {
+		token, _ := generateAuth()
+		return token
 	}
 	if token := os.Getenv("PANEL_ACCESS_TOKEN"); token != "" {
 		SetAccessToken(token)
-		return accessToken
+		authToken, _ := generateAuth()
+		return authToken
 	}
-	return accessToken
+	return ""
 }
 
 func GetApiBase() string {
@@ -241,8 +247,9 @@ func (p *PanelClient) Do() (*PanelClient, error) {
 		return nil, NewAuthError()
 	}
 
-	req.Header.Set("1Panel-Token", token)
-	req.Header.Set("1Panel-Timestamp", timestamp)
+	authToken, authTimestamp := generateAuth()
+	req.Header.Set("1Panel-Token", authToken)
+	req.Header.Set("1Panel-Timestamp", authTimestamp)
 
 	for key, value := range p.Headers {
 		req.Header.Set(key, value)

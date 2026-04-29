@@ -15,11 +15,11 @@ var ListBackupAccountsTool = mcp.NewServerTool[ListBackupAccountsInput, any](
 		payload := map[string]interface{}{
 			"page":     1,
 			"pageSize": 500,
-			"orderBy":  "created_at",
-			"order":    "null",
+			"orderBy":  "name",
+			"order":    "ascending",
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/settings/backup/search", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/backups/search", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )
@@ -39,7 +39,7 @@ var CreateBackupAccountTool = mcp.NewServerTool[CreateBackupAccountInput, any](
 			"backupPath": input.BackupPath,
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/settings/backup", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/backups", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )
@@ -62,11 +62,11 @@ var ListBackupRecordsTool = mcp.NewServerTool[ListBackupRecordsInput, any](
 			"pageSize": 100,
 			"type":     input.Type,
 			"name":     input.Name,
-			"orderBy":  "created_at",
-			"order":    "descending",
+			"orderBy":  "name",
+			"order":    "ascending",
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/settings/backup/search/records", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/backups/record/search", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )
@@ -87,7 +87,7 @@ var BackupOperateTool = mcp.NewServerTool[BackupOperateInput, any](
 			"detailName": input.DetailName,
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/settings/backup/backup", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/backups/backup", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )

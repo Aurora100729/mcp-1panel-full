@@ -16,11 +16,11 @@ var OperationLogsTool = mcp.NewServerTool[OperationLogsInput, any](
 			"page":     1,
 			"pageSize": 100,
 			"group":    params.Arguments.Group,
-			"orderBy":  "created_at",
-			"order":    "descending",
+			"orderBy":  "name",
+			"order":    "ascending",
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/logs/operation", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/logs/tasks/search", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )
@@ -38,11 +38,11 @@ var LoginLogsTool = mcp.NewServerTool[LoginLogsInput, any](
 			"pageSize": 100,
 			"ip":       params.Arguments.IP,
 			"status":   params.Arguments.Status,
-			"orderBy":  "created_at",
-			"order":    "descending",
+			"orderBy":  "name",
+			"order":    "ascending",
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/logs/login", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/logs/tasks/search", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )
@@ -57,7 +57,7 @@ var SystemLogsTool = mcp.NewServerTool[SystemLogsInput, any](
 	"Get 1Panel system logs",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[SystemLogsInput]) (*mcp.CallToolResultFor[any], error) {
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/logs/system")
+		client := utils.NewPanelClient("GET", "/logs/system/files")
 		return client.Request(&result)
 	},
 )

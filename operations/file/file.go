@@ -46,7 +46,7 @@ var ReadFileTool = mcp.NewServerTool[ReadFileInput, any](
 			"path": input.Path,
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/files/loadfile", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/files/content", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )

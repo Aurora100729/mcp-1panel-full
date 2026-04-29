@@ -19,8 +19,8 @@ var ListRuntimesTool = mcp.NewServerTool[ListRuntimesInput, any](
 			"pageSize": 500,
 			"name":     input.Name,
 			"type":     input.Type,
-			"orderBy":  "created_at",
-			"order":    "null",
+			"orderBy":  "name",
+			"order":    "ascending",
 		}
 		var result interface{}
 		client := utils.NewPanelClient("POST", "/runtimes/search", utils.WithPayload(payload))

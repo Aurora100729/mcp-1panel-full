@@ -17,8 +17,8 @@ var ListComposeTool = mcp.NewServerTool[ListComposeInput, any](
 			"page":     1,
 			"pageSize": 500,
 			"name":     params.Arguments.Name,
-			"orderBy":  "created_at",
-			"order":    "null",
+			"orderBy":  "name",
+			"order":    "ascending",
 		}
 		var result interface{}
 		client := utils.NewPanelClient("POST", "/containers/compose/search", utils.WithPayload(payload))
@@ -88,8 +88,8 @@ var ListComposeTemplatesTool = mcp.NewServerTool[ListComposeTemplatesInput, any]
 			"page":     1,
 			"pageSize": 500,
 			"name":     params.Arguments.Name,
-			"orderBy":  "created_at",
-			"order":    "null",
+			"orderBy":  "name",
+			"order":    "ascending",
 		}
 		var result interface{}
 		client := utils.NewPanelClient("POST", "/containers/template/search", utils.WithPayload(payload))
@@ -106,7 +106,7 @@ var DockerInfoTool = mcp.NewServerTool[DockerInfoInput, any](
 	"Get Docker daemon info: version, storage driver, containers count, images count, etc.",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[DockerInfoInput]) (*mcp.CallToolResultFor[any], error) {
 		var result interface{}
-		client := utils.NewPanelClient("GET", "/containers/docker")
+		client := utils.NewPanelClient("GET", "/containers/daemonjson")
 		return client.Request(&result)
 	},
 )

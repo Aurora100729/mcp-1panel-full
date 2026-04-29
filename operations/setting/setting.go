@@ -13,7 +13,7 @@ var GetSettingsTool = mcp.NewServerTool[GetSettingsInput, any](
 	"Get 1Panel system settings (port, language, theme, security settings, etc.)",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[GetSettingsInput]) (*mcp.CallToolResultFor[any], error) {
 		var result interface{}
-		client := utils.NewPanelClient("GET", "/settings/search")
+		client := utils.NewPanelClient("POST", "/settings/search")
 		return client.Request(&result)
 	},
 )

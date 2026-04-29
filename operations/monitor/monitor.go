@@ -24,7 +24,7 @@ var MonitorSearchTool = mcp.NewServerTool[MonitorSearchInput, any](
 			"endTime":   input.EndTime,
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/monitor/search", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/hosts/monitor/search", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )
@@ -41,7 +41,7 @@ var MonitorCleanTool = mcp.NewServerTool[MonitorCleanInput, any](
 	"[DANGEROUS] Clean up monitoring data",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[MonitorCleanInput]) (*mcp.CallToolResultFor[any], error) {
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/monitor/clean")
+		client := utils.NewPanelClient("POST", "/hosts/monitor/clean")
 		return client.Request(&result)
 	},
 )

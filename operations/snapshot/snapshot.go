@@ -16,8 +16,8 @@ var ListSnapshotsTool = mcp.NewServerTool[ListSnapshotsInput, any](
 			"page":     1,
 			"pageSize": 100,
 			"info":     params.Arguments.Info,
-			"orderBy":  "created_at",
-			"order":    "descending",
+			"orderBy":  "name",
+			"order":    "ascending",
 		}
 		var result interface{}
 		client := utils.NewPanelClient("POST", "/settings/snapshot/search", utils.WithPayload(payload))

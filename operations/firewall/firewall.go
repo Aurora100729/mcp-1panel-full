@@ -13,7 +13,7 @@ var FirewallStatusTool = mcp.NewServerTool[FirewallStatusInput, any](
 	"Get firewall status (active/inactive) and basic info",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[FirewallStatusInput]) (*mcp.CallToolResultFor[any], error) {
 		var result interface{}
-		client := utils.NewPanelClient("GET", "/hosts/firewall/base")
+		client := utils.NewPanelClient("POST", "/hosts/firewall/base")
 		return client.Request(&result)
 	},
 )
@@ -42,11 +42,15 @@ var ListFirewallRulesTool = mcp.NewServerTool[ListFirewallRulesInput, any](
 	"List firewall port rules",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[ListFirewallRulesInput]) (*mcp.CallToolResultFor[any], error) {
 		input := params.Arguments
+		ruleType := input.Type
+		if ruleType == "" {
+			ruleType = "port"
+		}
 		payload := map[string]interface{}{
 			"page":     1,
 			"pageSize": 500,
 			"info":     input.Info,
-			"type":     input.Type,
+			"type":     ruleType,
 			"status":   input.Status,
 			"strategy": input.Strategy,
 		}
@@ -101,7 +105,7 @@ var DeleteFirewallRuleTool = mcp.NewServerTool[DeleteFirewallRuleInput, any](
 			"address":  input.Address,
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/hosts/firewall/port/del", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/hosts/firewall/batch", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )
@@ -120,10 +124,11 @@ var ListFirewallIPRulesTool = mcp.NewServerTool[ListFirewallIPRulesInput, any](
 		payload := map[string]interface{}{
 			"page":     1,
 			"pageSize": 500,
+			"type":     "address",
 			"info":     params.Arguments.Info,
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/hosts/firewall/ip/search", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/hosts/firewall/search", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )

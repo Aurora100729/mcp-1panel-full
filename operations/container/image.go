@@ -16,8 +16,8 @@ var ListImagesTool = mcp.NewServerTool[ListImagesInput, any](
 			"page":     1,
 			"pageSize": 500,
 			"name":     params.Arguments.Name,
-			"orderBy":  "created_at",
-			"order":    "null",
+			"orderBy":  "createdAt",
+			"order":    "ascending",
 		}
 		var result interface{}
 		client := utils.NewPanelClient("POST", "/containers/image/search", utils.WithPayload(payload))

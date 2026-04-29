@@ -18,8 +18,8 @@ var ListCronsTool = mcp.NewServerTool[ListCronsInput, any](
 			"pageSize": 500,
 			"name":     params.Arguments.Name,
 			"type":     params.Arguments.Type,
-			"orderBy":  "created_at",
-			"order":    "null",
+			"orderBy":  "name",
+			"order":    "ascending",
 		}
 		var result interface{}
 		client := utils.NewPanelClient("POST", "/cronjobs/search", utils.WithPayload(payload))

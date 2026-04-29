@@ -13,7 +13,7 @@ var SSHInfoTool = mcp.NewServerTool[SSHInfoInput, any](
 	"Get SSH service configuration and status on the 1Panel server",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[SSHInfoInput]) (*mcp.CallToolResultFor[any], error) {
 		var result interface{}
-		client := utils.NewPanelClient("GET", "/hosts/ssh/search")
+		client := utils.NewPanelClient("POST", "/hosts/ssh/search")
 		return client.Request(&result)
 	},
 )

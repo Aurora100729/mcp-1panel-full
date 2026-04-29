@@ -20,13 +20,17 @@ var ListContainersTool = mcp.NewServerTool[ListContainersInput, any](
 			PageSize: 500,
 			Name:     input.Name,
 		}
+		state := input.State
+		if state == "" {
+			state = "all"
+		}
 		payload := map[string]interface{}{
 			"page":     req.Page,
 			"pageSize": req.PageSize,
 			"name":     input.Name,
-			"state":    input.State,
-			"orderBy":  "created_at",
-			"order":    "null",
+			"state":    state,
+			"orderBy":  "name",
+			"order":    "ascending",
 			"filters":  "",
 		}
 		var result interface{}

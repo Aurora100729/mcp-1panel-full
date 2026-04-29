@@ -12,17 +12,22 @@ var ListProcessesTool = mcp.NewServerTool[ListProcessesInput, any](
 	"list_processes",
 	"List running processes on the 1Panel server with CPU/memory usage",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[ListProcessesInput]) (*mcp.CallToolResultFor[any], error) {
+		input := params.Arguments
+		pType := input.Type
+		if pType == "" {
+			pType = "listening"
+		}
 		payload := map[string]interface{}{
-			"type": params.Arguments.Type,
+			"type": pType,
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/process", utils.WithPayload(payload))
+		client := utils.NewPanelClient("POST", "/process/listening", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )
 
 type ListProcessesInput struct {
-	Type string `json:"type,omitempty" jsonschema:"process type: all, system, user. Default: all"`
+	Type string `json:"type,omitempty" jsonschema:"process type filter"`
 }
 
 var StopProcessTool = mcp.NewServerTool[StopProcessInput, any](
