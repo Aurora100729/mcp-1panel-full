@@ -188,6 +188,8 @@ func addTools(s *mcp.Server) {
 		sshmanage.SSHUpdateTool,
 		sshmanage.SSHLogsTool,
 		sshmanage.SSHGenerateKeyTool,
+		sshmanage.SSHRemoteExecTool,
+		sshmanage.SSHPortCheckTool,
 
 		// ── Logs ──
 		panellog.OperationLogsTool,
