@@ -1,112 +1,185 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=200&section=header&text=mcp-1panel-full&fontSize=60&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=AI-Native%20Server%20Management%20via%201Panel%20MCP&descAlignY=58&descSize=18" alt="Header" />
+<!-- ═══════════════════════════════  HERO  ═══════════════════════════════ -->
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,50:16213e,100:0f3460&height=280&section=header&text=mcp-1panel-full&fontSize=78&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=AI-Native%20Server%20Management%20%E2%80%A2%2090%2B%20Tools%20%E2%80%A2%20Built%20with%20Go&descAlignY=58&descSize=18" />
+
+<!-- ════════════════════════════  TYPING TAGLINE  ════════════════════════ -->
+
+<a href="https://github.com/Aurora100729/mcp-1panel-full">
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=20&pause=1200&color=58A6FF&center=true&vCenter=true&width=820&lines=Talk+to+your+server+in+plain+English.;90%2B+tools+%E2%80%A2+Full+1Panel+v2+API+%E2%80%A2+SSH+%E2%80%A2+Docker+%E2%80%A2+Files;Built+for+Claude+%C2%B7+Windsurf+%C2%B7+Cursor+%C2%B7+Any+MCP+client" />
+</a>
+
+<br/>
+
+<!-- ════════════════════════════  CORE BADGES  ═══════════════════════════ -->
 
 <p>
-  <img src="https://img.shields.io/badge/Go-1.25-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go" />
-  <img src="https://img.shields.io/badge/MCP-1.0-purple?style=for-the-badge&logo=anthropic&logoColor=white" alt="MCP" />
-  <img src="https://img.shields.io/badge/License-GPL%20v3-blue?style=for-the-badge&logo=gnu&logoColor=white" alt="License" />
-  <img src="https://img.shields.io/badge/Tools-90%2B-success?style=for-the-badge&logo=tools&logoColor=white" alt="Tools" />
+  <img src="https://img.shields.io/badge/Go-1.25-00ADD8?style=for-the-badge&logo=go&logoColor=white&labelColor=0D1117" />
+  <img src="https://img.shields.io/badge/MCP-1.0-512BD4?style=for-the-badge&logo=anthropic&logoColor=white&labelColor=0D1117" />
+  <img src="https://img.shields.io/badge/License-GPL%20v3-3DA639?style=for-the-badge&logo=gnu&logoColor=white&labelColor=0D1117" />
+  <img src="https://img.shields.io/badge/Tools-90%2B-FF6B6B?style=for-the-badge&logo=toolbox&logoColor=white&labelColor=0D1117" />
+  <img src="https://img.shields.io/badge/1Panel-v2.0-005CFF?style=for-the-badge&logo=server&logoColor=white&labelColor=0D1117" />
 </p>
 
-<p>
-  <img src="https://img.shields.io/github/stars/Aurora100729/mcp-1panel-full?style=for-the-badge&color=yellow&labelColor=0D1117" alt="Stars" />
-  <img src="https://img.shields.io/github/forks/Aurora100729/mcp-1panel-full?style=for-the-badge&color=blue&labelColor=0D1117" alt="Forks" />
-  <img src="https://img.shields.io/github/issues/Aurora100729/mcp-1panel-full?style=for-the-badge&color=red&labelColor=0D1117" alt="Issues" />
-  <img src="https://img.shields.io/github/last-commit/Aurora100729/mcp-1panel-full?style=for-the-badge&color=green&labelColor=0D1117" alt="Last commit" />
-</p>
+<!-- ════════════════════════════  STATUS BADGES  ══════════════════════════ -->
 
 <p>
-  <strong>让 AI 助手用自然语言全面操控你的 1Panel 服务器</strong><br/>
-  <sub>Claude · Windsurf · Cursor · 任何 MCP 兼容客户端</sub>
+  <img src="https://img.shields.io/github/stars/Aurora100729/mcp-1panel-full?style=flat-square&color=FFD700&labelColor=0D1117&label=%E2%9C%A6%20stars" />
+  <img src="https://img.shields.io/github/forks/Aurora100729/mcp-1panel-full?style=flat-square&color=58A6FF&labelColor=0D1117&label=%E2%88%9E%20forks" />
+  <img src="https://img.shields.io/github/issues/Aurora100729/mcp-1panel-full?style=flat-square&color=FF6B6B&labelColor=0D1117&label=%E2%9C%97%20issues" />
+  <img src="https://img.shields.io/github/last-commit/Aurora100729/mcp-1panel-full?style=flat-square&color=00C896&labelColor=0D1117&label=%E2%9C%93%20last%20commit" />
+  <img src="https://img.shields.io/github/repo-size/Aurora100729/mcp-1panel-full?style=flat-square&color=B57EDC&labelColor=0D1117&label=%E2%80%BB%20size" />
 </p>
+
+<sub><i>Released under GPL-3.0 · Forged in Go · Born for the AI age</i></sub>
 
 </div>
 
-> 🚀 基于 [1Panel-dev/mcp-1panel](https://github.com/1Panel-dev/mcp-1panel) 深度重构。工具数量从 **11** 个扩展到 **90+**，覆盖 1Panel v2.0 全量 API + 本地 Shell / 文件系统 / SSH 远程执行。
+<br/>
 
----
-
-## ✨ 亮点
-
-- 🚀 **90+ 工具** — 覆盖 1Panel 几乎所有 API
-- 🔧 **通用透传** — `panel_request` 直接调用任意未封装端点
-- 🔒 **SSH 远程执行** — 支持密码 / 私钥 / 加密私钥 / keyboard-interactive
-- ⚙️ **可配置默认值** — CLI 参数预填充 SSH 主机/用户/密钥，调用时只需 `command`
-- 📦 **多传输模式** — `stdio` / `sse` / `streamable-http`
-- 🐳 **Docker 友好** — 提供官方镜像
-- 🛡️ **结构化输出** — 所有工具返回 JSON 结构化内容，便于 AI 二次处理
-- 🐛 **针对 v2.0.15 修复** — 修复多个上游 API 参数校验问题
-
----
-
-## 🛠 技术栈
+<!-- ═══════════════════════════════════════════════════════════════════
+                        TAGLINE / MANIFESTO BLOCK
+     ═══════════════════════════════════════════════════════════════════ -->
 
 <div align="center">
 
-<img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go" />
-<img src="https://img.shields.io/badge/Model%20Context%20Protocol-512BD4?style=for-the-badge&logo=anthropic&logoColor=white" alt="MCP" />
-<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
-<img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux" />
-<img src="https://img.shields.io/badge/SSH-231F20?style=for-the-badge&logo=openssh&logoColor=white" alt="SSH" />
-<img src="https://img.shields.io/badge/1Panel-005CFF?style=for-the-badge&logo=server&logoColor=white" alt="1Panel" />
+```diff
++ "Don't click. Don't type commands. Just describe what you want."
+- A new paradigm for server administration — conversational, intentional, magical.
+```
 
 </div>
 
----
+<br/>
 
-## 📖 目录
+<!-- ═══════════════════════════════════════════════════════════════════
+                              QUICK PITCH
+     ═══════════════════════════════════════════════════════════════════ -->
 
-- [功能总览](#功能总览)
-- [快速开始](#快速开始)
-- [CLI 参数](#cli-参数)
-- [MCP 客户端配置](#mcp-客户端配置)
-- [SSH 远程执行](#ssh-远程执行)
-- [使用示例](#使用示例)
-- [项目结构](#项目结构)
-- [故障排查](#故障排查)
-- [安全说明](#安全说明)
-- [更新日志](#更新日志)
+<table>
+<tr>
+<td valign="top" width="50%">
 
----
+### 💡 Why this exists
 
-## 功能总览
+Traditional server management means juggling SSH terminals, browser tabs, doc pages, and command-line cheat sheets — every single day.
 
-| 分类 | 工具数 | 代表工具 |
-|------|:---:|------|
-| **通用透传** | 1 | `panel_request` — 任意 1Panel API 端点 |
-| **系统/仪表盘** | 2 | `get_system_info` `get_dashboard_info` |
-| **网站管理** | 10 | `list_websites` `create_website` `update_website_https` |
-| **SSL 证书** | 2 | `list_ssls` `create_ssl` |
-| **应用商店** | 9 | `app_store_list` `install_mysql` `install_openresty` `app_operate` |
-| **数据库** | 7 | `list_databases` `create_database` `database_backup` `redis_status` |
-| **Docker 容器** | 8 | `list_containers` `container_create` `container_exec` `container_logs` |
-| **Docker 镜像** | 5 | `list_images` `image_pull` `image_build` `image_prune` |
-| **Docker 网络/卷** | 7 | `list_networks` `create_volume` `delete_network` |
-| **Docker Compose** | 6 | `list_compose` `compose_up` `compose_operate` |
-| **文件管理** | 11 | `panel_file_list` `panel_file_read` `panel_file_compress` `panel_file_wget` |
-| **防火墙** | 8 | `firewall_status` `list_firewall_rules` `create_firewall_ip_rule` |
-| **定时任务** | 5 | `list_crons` `create_cron` `handle_cron` |
-| **进程管理** | 2 | `list_processes` `stop_process` |
-| **SSH 服务** | 5 | `ssh_info` `ssh_operate` `ssh_logs` `ssh_generate_key` |
-| **远程 SSH 执行** ⭐ | 2 | `ssh_remote_exec` `ssh_port_check` |
-| **日志** | 3 | `operation_logs` `login_logs` `system_logs` |
-| **监控** | 2 | `monitor_search` `monitor_clean` |
-| **备份** | 4 | `list_backup_accounts` `backup_operate` `database_backup` |
-| **快照** | 4 | `list_snapshots` `create_snapshot` `recover_snapshot` |
-| **系统设置** | 5 | `get_settings` `update_password` `update_panel_port` `panel_upgrade` |
-| **工具箱** | 10 | `toolbox_dns` `toolbox_hosts` `toolbox_swap` `toolbox_fail2ban_status` |
-| **运行环境** | 3 | `list_runtimes` `create_runtime` `runtime_operate` |
-| **本地 Shell** | 1 | `shell_exec` 本地命令执行 |
-| **本地文件系统** | 6 | `local_file_read` `local_file_write` `local_file_search` |
+**`mcp-1panel-full`** unfolds the entire 1Panel API surface into a vocabulary your AI assistant can speak natively. From spinning up containers to renewing SSL certificates to chasing down errant processes, you describe; the AI executes.
 
-> 完整工具列表见 `main.go` 中的 `addTools()` 函数。
+> *Make infrastructure feel like a conversation.*
 
----
+</td>
+<td valign="top" width="50%">
 
-## 快速开始
+### 🌟 What's inside
 
-### 1. 编译
+- 📦 **90+ tools** — full 1Panel v2 surface
+- 🔧 **`panel_request`** — escape hatch for any future endpoint
+- 🔒 **Native SSH** — password / key / passphrase / kbd-interactive
+- ⚙️ **Sticky defaults** — set once via CLI flags, call with `command` only
+- 🌊 **Three transports** — `stdio` / `sse` / `streamable-http`
+- 🐳 **Docker-friendly** — one-line container deploy
+- 🛡️ **Structured output** — JSON for AI second-pass reasoning
+- 🩹 **v2.0.15 compatibility patches** — applied upstream-first
+
+</td>
+</tr>
+</table>
+
+<br/>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+                              TECH STACK
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<h2 align="center">⚔️ &nbsp; Built With</h2>
+
+<div align="center">
+
+<img src="https://skillicons.dev/icons?i=go,docker,linux,nginx,redis,mysql,postgres,bash&perline=8" />
+
+<sub><i>The languages and infrastructure this project speaks fluently.</i></sub>
+
+</div>
+
+<br/>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+                              TABLE OF CONTENTS
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<div align="center">
+
+<h2>📖 &nbsp; Compass</h2>
+
+<a href="#-tool-catalog">Tool Catalog</a> · 
+<a href="#-quick-start">Quick Start</a> · 
+<a href="#-cli-flags">CLI Flags</a> · 
+<a href="#-mcp-client-config">MCP Config</a> · 
+<a href="#-ssh-remote-execution">SSH Remote</a> · 
+<a href="#-real-world-conversations">Examples</a><br/>
+<a href="#-project-layout">Layout</a> · 
+<a href="#-troubleshooting">Troubleshooting</a> · 
+<a href="#-security">Security</a> · 
+<a href="#-changelog">Changelog</a>
+
+</div>
+
+<br/>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+                              TOOL CATALOG
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<h2>🧰 Tool Catalog</h2>
+
+<details>
+<summary><b>📊 Click to expand the full toolset (24 categories · 90+ tools)</b></summary>
+
+<br/>
+
+| Domain | Count | Signature Tools |
+|---|:-:|---|
+| 🌐 **Generic Passthrough** | 1 | `panel_request` — call any 1Panel endpoint directly |
+| 📊 **System & Dashboard** | 2 | `get_system_info` · `get_dashboard_info` |
+| 🌍 **Websites** | 10 | `list_websites` · `create_website` · `update_website_https` |
+| 🔐 **SSL Certificates** | 2 | `list_ssls` · `create_ssl` |
+| 🛍️ **App Store** | 9 | `app_store_list` · `install_mysql` · `install_openresty` · `app_operate` |
+| 💾 **Databases** | 7 | `list_databases` · `create_database` · `database_backup` · `redis_status` |
+| 🐳 **Docker Containers** | 8 | `list_containers` · `container_create` · `container_exec` · `container_logs` |
+| 🖼️ **Docker Images** | 5 | `list_images` · `image_pull` · `image_build` · `image_prune` |
+| 🌐 **Networks & Volumes** | 7 | `list_networks` · `create_volume` · `delete_network` |
+| 📜 **Docker Compose** | 6 | `list_compose` · `compose_up` · `compose_operate` |
+| 📁 **Files** | 11 | `panel_file_list` · `panel_file_read` · `panel_file_compress` · `panel_file_wget` |
+| 🛡️ **Firewall** | 8 | `firewall_status` · `list_firewall_rules` · `create_firewall_ip_rule` |
+| ⏰ **Cron Jobs** | 5 | `list_crons` · `create_cron` · `handle_cron` |
+| 🔧 **Processes** | 2 | `list_processes` · `stop_process` |
+| 🔑 **SSH Service** | 5 | `ssh_info` · `ssh_operate` · `ssh_logs` · `ssh_generate_key` |
+| ⚡ **Remote SSH Exec** ⭐ | 2 | `ssh_remote_exec` · `ssh_port_check` |
+| 📝 **Logs** | 3 | `operation_logs` · `login_logs` · `system_logs` |
+| 📈 **Monitoring** | 2 | `monitor_search` · `monitor_clean` |
+| 💼 **Backups** | 4 | `list_backup_accounts` · `backup_operate` · `database_backup` |
+| 📷 **Snapshots** | 4 | `list_snapshots` · `create_snapshot` · `recover_snapshot` |
+| ⚙️ **System Settings** | 5 | `get_settings` · `update_password` · `update_panel_port` · `panel_upgrade` |
+| 🧪 **Toolbox** | 10 | `toolbox_dns` · `toolbox_hosts` · `toolbox_swap` · `toolbox_fail2ban_status` |
+| 🌱 **Runtimes** | 3 | `list_runtimes` · `create_runtime` · `runtime_operate` |
+| 💻 **Local Shell** | 1 | `shell_exec` — local cmd / bash / pwsh |
+| 📂 **Local Filesystem** | 6 | `local_file_read` · `local_file_write` · `local_file_search` |
+
+> Full registration code: [`main.go::addTools()`](main.go).
+
+</details>
+
+<br/>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+                              QUICK START
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<h2>🚀 Quick Start</h2>
+
+### 1️⃣ Build from source
 
 ```bash
 git clone https://github.com/Aurora100729/mcp-1panel-full.git
@@ -114,31 +187,31 @@ cd mcp-1panel-full
 go build -o mcp-1panel-full .
 ```
 
-需要 Go 1.25+。
+> Requires **Go 1.25+**.
 
-### 2. 获取 1Panel API Key
+### 2️⃣ Get a 1Panel API key
 
-1. 登录 1Panel 面板
-2. 右上角 **个人信息** → **API 接口**
-3. 启用 API 接口，复制 `API Key`
-4. **⚠️ 必须将客户端 IP 加入白名单**
+```
+1Panel  →  Profile (top-right)  →  API Interface  →  Enable
+        →  Copy Key  →  Add your client IP to whitelist ⚠️
+```
 
-### 3. 运行
+### 3️⃣ Run
 
 ```bash
-# stdio（默认，与 MCP 客户端集成用）
+# stdio (default — for MCP clients)
 ./mcp-1panel-full --token YOUR_API_KEY --host http://127.0.0.1:9999
 
-# SSE（旧 HTTP 模式）
-./mcp-1panel-full --transport sse --addr 0.0.0.0:8000 \
+# Streamable HTTP (recommended for HTTP)
+./mcp-1panel-full --transport streamable-http --addr 0.0.0.0:8000 \
   --token YOUR_API_KEY --host http://127.0.0.1:9999
 
-# Streamable HTTP（推荐 HTTP 模式）
-./mcp-1panel-full --transport streamable-http --addr 0.0.0.0:8000 \
+# SSE (legacy HTTP)
+./mcp-1panel-full --transport sse --addr 0.0.0.0:8000 \
   --token YOUR_API_KEY --host http://127.0.0.1:9999
 ```
 
-### 4. Docker 部署
+### 4️⃣ Or run with Docker
 
 ```bash
 docker build -t mcp-1panel-full .
@@ -151,43 +224,59 @@ docker run -d --name mcp-1panel \
   --host http://host.docker.internal:9999
 ```
 
----
+<br/>
 
-## CLI 参数
+<!-- ═══════════════════════════════════════════════════════════════════
+                              CLI FLAGS
+     ═══════════════════════════════════════════════════════════════════ -->
 
-### 1Panel 连接
+<h2>🎛️ CLI Flags</h2>
 
-| 参数 | 默认 | 说明 |
-|------|------|------|
-| `--token` | _(必填)_ | 1Panel API Key |
-| `--host` | _(必填)_ | 1Panel 地址，如 `http://127.0.0.1:9999` |
+<table>
+<tr>
+<th align="left">1Panel Connection</th>
+<th align="left">Default</th>
+<th align="left">Description</th>
+</tr>
+<tr><td><code>--token</code></td><td><i>required</i></td><td>1Panel API Key</td></tr>
+<tr><td><code>--host</code></td><td><i>required</i></td><td>1Panel address, e.g. <code>http://127.0.0.1:9999</code></td></tr>
+</table>
 
-### 传输
+<table>
+<tr>
+<th align="left">Transport</th>
+<th align="left">Default</th>
+<th align="left">Description</th>
+</tr>
+<tr><td><code>--transport</code></td><td><code>stdio</code></td><td><code>stdio</code> · <code>sse</code> · <code>streamable-http</code></td></tr>
+<tr><td><code>--addr</code></td><td><code>http://localhost:8000</code></td><td>HTTP listening address (HTTP transports only)</td></tr>
+</table>
 
-| 参数 | 默认 | 说明 |
-|------|------|------|
-| `--transport` | `stdio` | `stdio` / `sse` / `streamable-http` |
-| `--addr` | `http://localhost:8000` | HTTP 监听地址（仅 HTTP 传输） |
+<table>
+<tr>
+<th align="left">SSH Defaults (optional)</th>
+<th align="left">Default</th>
+<th align="left">Description</th>
+</tr>
+<tr><td><code>--ssh-host</code></td><td><i>empty</i></td><td>Default SSH host (IP or domain)</td></tr>
+<tr><td><code>--ssh-user</code></td><td><i>empty</i></td><td>Default SSH username</td></tr>
+<tr><td><code>--ssh-key</code></td><td><i>empty</i></td><td>Default private key path</td></tr>
+<tr><td><code>--ssh-password</code></td><td><i>empty</i></td><td>Default password (plaintext — discouraged)</td></tr>
+<tr><td><code>--ssh-port</code></td><td><code>22</code></td><td>Default SSH port</td></tr>
+</table>
 
-### SSH 远程执行默认值（可选）
+<sub>💡 Pre-fill SSH defaults so AI calls only need <code>command</code>.</sub>
 
-预填后调用 `ssh_remote_exec` 只需 `command` 参数。
+<br/>
 
-| 参数 | 默认 | 说明 |
-|------|------|------|
-| `--ssh-host` | _空_ | 默认 SSH 主机（IP/域名） |
-| `--ssh-user` | _空_ | 默认 SSH 用户名 |
-| `--ssh-key` | _空_ | 默认私钥文件路径 |
-| `--ssh-password` | _空_ | 默认 SSH 密码（不推荐，明文） |
-| `--ssh-port` | `22` | 默认 SSH 端口 |
+<!-- ═══════════════════════════════════════════════════════════════════
+                              MCP CLIENT CONFIG
+     ═══════════════════════════════════════════════════════════════════ -->
 
----
+<h2>🔌 MCP Client Config</h2>
 
-## MCP 客户端配置
-
-### Windsurf / Claude Desktop / Cursor
-
-在 `mcp_config.json` 中：
+<details open>
+<summary><b>Windsurf / Claude Desktop / Cursor</b> &nbsp;<sub>(click to toggle)</sub></summary>
 
 ```json
 {
@@ -207,7 +296,10 @@ docker run -d --name mcp-1panel \
 }
 ```
 
-### Linux / macOS
+</details>
+
+<details>
+<summary><b>Linux / macOS</b> &nbsp;<sub>(click to toggle)</sub></summary>
 
 ```json
 {
@@ -223,13 +315,25 @@ docker run -d --name mcp-1panel \
 }
 ```
 
----
+</details>
 
-## SSH 远程执行
+<br/>
 
-### 调用方式
+<!-- ═══════════════════════════════════════════════════════════════════
+                              SSH REMOTE EXECUTION
+     ═══════════════════════════════════════════════════════════════════ -->
 
-**方式 1 — 完整参数（每次提供）：**
+<h2>⚡ SSH Remote Execution</h2>
+
+> The crown jewel of this server — a single tool that lets your AI run anything on remote hosts.
+
+<table>
+<tr>
+<td valign="top" width="50%">
+
+#### 📞 Two ways to call
+
+**Option A — Pass everything per call:**
 
 ```json
 {
@@ -240,26 +344,33 @@ docker run -d --name mcp-1panel \
 }
 ```
 
-**方式 2 — 使用 CLI 默认值（启动时已配置）：**
+**Option B — Use CLI defaults:**
 
 ```json
 { "command": "df -h" }
 ```
 
-### 认证方式
+</td>
+<td valign="top" width="50%">
 
-| 字段 | 说明 |
-|------|------|
-| `password` | 密码认证 |
-| `keyPath` | 私钥文件路径 |
-| `keyContent` | 私钥内容（PEM 格式直接粘贴） |
-| `keyPassphrase` | 加密私钥的口令 |
+#### 🔐 Auth methods supported
 
-支持自动 keyboard-interactive 回退（兼容禁用 `PasswordAuthentication` 的服务器）。
+| Field | Purpose |
+|---|---|
+| `password` | Plain password |
+| `keyPath` | Path to private key file |
+| `keyContent` | PEM key content directly |
+| `keyPassphrase` | Decrypt encrypted private key |
 
-### 输出
+Auto-fallback to **`keyboard-interactive`** for servers with `PasswordAuthentication no`.
 
-```
+</td>
+</tr>
+</table>
+
+#### 📤 Output format
+
+```text
 exit=0
 --- stdout ---
 ubuntu
@@ -268,196 +379,337 @@ VM-0-5-ubuntu
 --- stderr ---
 ```
 
-同时返回结构化字段：`{ host, user, port, command, stdout, stderr, exitCode }`。
+Plus structured JSON: `{ host, user, port, command, stdout, stderr, exitCode }`.
 
----
+<br/>
 
-## 使用示例
+<!-- ═══════════════════════════════════════════════════════════════════
+                              EXAMPLES
+     ═══════════════════════════════════════════════════════════════════ -->
 
-让 AI 助手用自然语言操作：
+<h2>💬 Real-World Conversations</h2>
 
-### 系统监控
+> *Watch how natural language unfolds into precise tool calls.*
 
-> 帮我看看服务器现在的 CPU、内存、磁盘使用率
+<table>
+<tr>
+<td valign="top" width="50%">
 
-→ AI 调用 `get_dashboard_info`
-
-### 应用部署
-
-> 帮我安装一个 Redis，端口 6380，密码 abc123
-
-→ AI 调用 `app_store_list` 找 Redis → `panel_request` POST `/apps/install`
-
-### 容器管理
-
-> 列出所有容器，把停止的都启动
-
-→ `list_containers` → `container_operate(operation: "start", names: [...])`
-
-### 远程命令
-
-> 帮我看看远程服务器的磁盘使用率，并清理 /tmp 下大于 100MB 的文件
-
-→ `ssh_remote_exec(command: "df -h && find /tmp -size +100M -delete")`
-
-### 数据库备份
-
-> 备份所有 MySQL 数据库到本地
-
-→ `list_databases` → 循环 `database_backup`
-
-### 故障排查
-
-> Nginx 启动失败，帮我看看日志
-
-→ `list_installed_apps` 找 nginx → `app_installed_detail` → `container_logs`
-
----
-
-## 项目结构
+#### 🩺 *"How is my server doing?"*
 
 ```
-├── main.go                       # 入口 + CLI flags + 工具注册
-├── utils/                        # HTTP 客户端 + 通用工具
-├── operations/                   # 1Panel API 工具（按领域分组）
-│   ├── generic/                  #   panel_request 通用透传
-│   ├── system/                   #   系统/仪表盘
-│   ├── website/                  #   网站管理
-│   ├── ssl/                      #   SSL 证书
-│   ├── app/                      #   应用商店
-│   ├── database/                 #   MySQL/PostgreSQL/Redis
-│   ├── container/                #   Docker 容器/镜像/网络/卷/Compose
-│   ├── file/                     #   文件管理
-│   ├── firewall/                 #   防火墙规则
-│   ├── cron/                     #   定时任务
-│   ├── process/                  #   进程管理
-│   ├── sshmanage/                #   SSH 服务管理 + 远程执行 ⭐
-│   ├── panellog/                 #   操作/登录/系统日志
-│   ├── monitor/                  #   性能监控
-│   ├── backup/                   #   备份/恢复
-│   ├── snapshot/                 #   系统快照
-│   ├── setting/                  #   系统设置
-│   ├── toolbox/                  #   DNS/Hosts/Swap/Fail2Ban
-│   ├── runtime/                  #   PHP/Node.js/Python 运行环境
-│   └── types/                    #   公共类型定义
-├── tools/                        # 本地能力工具
-│   ├── shell/                    #   本地 Shell 执行
-│   └── localfs/                  #   本地文件系统
-├── logs/                         # 运行日志（自动创建）
-├── Dockerfile
-├── go.mod
-└── README.md
+AI ➜ get_dashboard_info()
+↳ CPU 5%, Mem 6%, Disk 12%, Uptime 2:03
 ```
 
----
-
-## 故障排查
-
-### `dial tcp :22:` SSH 错误
-
-CLI 默认 `--ssh-host` 未生效。检查：
-
-1. `mcp_config.json` 中是否传了 `--ssh-host`
-2. 重启 MCP 客户端（不仅是工具刷新）
-3. 查看 `logs/mcp-1panel-full.log` 是否有 `[ssh] defaults set: ...`
-
-### `请求参数错误` (1Panel API 400)
-
-某些 1Panel 端点对必填字段校验严格。本项目已为常见端点（如 `list_databases`、`list_backup_records`、`firewall_status`、`monitor_search`）注入合理默认值。如仍失败，使用 `panel_request` 透传并显式提供完整 payload。
-
-### `Not Found (code: 404)` (1Panel API)
-
-不同 1Panel 版本 API 路径有变。本项目兼容 v2.0.15。如使用更新版本，可用 `panel_request` 调用新端点。
-
-### Token 鉴权失败
-
-1. 确认 1Panel 中 API 接口已启用
-2. 确认客户端 IP 已加入 API 白名单
-3. Token 区分大小写，不要截断
-
-### MCP 客户端连接断开
+#### 📦 *"Install Redis on port 6380."*
 
 ```
-transport error: transport closed
+AI ➜ app_store_list("redis")
+AI ➜ panel_request POST /apps/install
+       { name: "redis", port: 6380, ... }
 ```
 
-通常需重启 MCP 客户端进程：
+#### 🗄️ *"Backup all my MySQL databases."*
 
-- **Windsurf**: `Ctrl+Shift+P` → `Reload Window`
-- **Claude Desktop**: 完全退出后重启
-- **Cursor**: 重启 Cursor
+```
+AI ➜ list_databases() → 5 dbs
+AI ➜ database_backup × 5 in parallel
+```
 
----
+</td>
+<td valign="top" width="50%">
 
-## 安全说明
+#### 🔥 *"Block IP 1.2.3.4 in firewall."*
 
-⚠️ 本工具拥有**对 1Panel 完全控制权 + 远程 SSH 执行权 + 本地 Shell 执行权**，等同于服务器 root 权限。
+```
+AI ➜ create_firewall_ip_rule(
+       address: "1.2.3.4",
+       strategy: "drop"
+     )
+```
 
-### 必须遵守
+#### 🐛 *"Why is nginx failing?"*
 
-1. **不要在公开/不可信环境运行**
-2. **不要将 API Token、SSH 私钥提交到仓库**（已在 `.gitignore` 中屏蔽 `*.pem` `*.key`）
-3. **不要使用 `--ssh-password` 在配置文件中明文存储密码**，优先使用密钥
-4. **`[DANGEROUS]` 标记的工具会修改/删除资源，AI 调用前应确认**
+```
+AI ➜ list_installed_apps() → openresty
+AI ➜ app_installed_detail(id)
+AI ➜ container_logs(id, tail=100)
+```
 
-### 推荐做法
+#### ⚡ *"Free up /tmp on remote server."*
 
-- 私钥放在 `~/.ssh/` 目录并设置 `chmod 600`
-- 使用专用 1Panel API Key 并加 IP 白名单
-- 对生产环境使用只读 API Key（如 1Panel 后续支持权限分级）
-- 定期轮换 API Key 与 SSH 密钥
+```
+AI ➜ ssh_remote_exec(
+       command: "find /tmp -size +100M -delete"
+     )
+```
 
----
+</td>
+</tr>
+</table>
 
-## 更新日志
+<br/>
 
-### v1.0.0 (2026-04)
+<!-- ═══════════════════════════════════════════════════════════════════
+                              PROJECT LAYOUT
+     ═══════════════════════════════════════════════════════════════════ -->
 
-- ✅ 新增 `ssh_remote_exec` / `ssh_port_check` 工具，支持密码/密钥/加密密钥认证
-- ✅ 新增 CLI 参数 `--ssh-host` / `--ssh-user` / `--ssh-key` / `--ssh-password` / `--ssh-port` 作为默认值
-- ✅ 修复 1Panel v2.0.15 API 兼容性：
-  - `firewall_status` 添加 `name` 必填字段
-  - `monitor_search` 自动填充时间窗口
-  - `list_databases` 修正 `orderBy` 校验
-  - `list_backup_records` 添加 `type` 默认值
-  - `list_processes` 改用 `/process/:pid` 端点（v2.0.15 移除了 `/process/listening`）
-- ✅ 工具数量扩展到 90+
-- ✅ 日志路径改为可执行文件同级目录，避免工作目录差异
+<h2>🗂️ Project Layout</h2>
 
----
+```
+mcp-1panel-full/
+│
+├── 🚪 main.go                       # Entry · CLI flags · tool registration
+├── 📦 utils/                        # HTTP client · helpers
+│
+├── 🛠️  operations/                  # 1Panel API tools — domain-grouped
+│   ├── 🌐 generic/                  #   panel_request passthrough
+│   ├── 📊 system/                   #   System / Dashboard
+│   ├── 🌍 website/                  #   Sites
+│   ├── 🔐 ssl/                      #   SSL certificates
+│   ├── 🛍️  app/                     #   App store
+│   ├── 💾 database/                 #   MySQL · PostgreSQL · Redis
+│   ├── 🐳 container/                #   Docker · Compose
+│   ├── 📁 file/                     #   File management
+│   ├── 🛡️  firewall/                #   Firewall rules
+│   ├── ⏰ cron/                     #   Scheduled jobs
+│   ├── 🔧 process/                  #   Process management
+│   ├── 🔑 sshmanage/                #   SSH service + remote exec ⭐
+│   ├── 📝 panellog/                 #   Audit logs
+│   ├── 📈 monitor/                  #   Performance monitoring
+│   ├── 💼 backup/                   #   Backup / restore
+│   ├── 📷 snapshot/                 #   System snapshots
+│   ├── ⚙️  setting/                 #   System settings
+│   ├── 🧪 toolbox/                  #   DNS · Hosts · Swap · Fail2Ban
+│   ├── 🌱 runtime/                  #   PHP / Node / Python runtimes
+│   └── 📐 types/                    #   Shared types
+│
+├── 🧰 tools/                        # Local capability tools
+│   ├── 💻 shell/                    #   Local shell exec
+│   └── 📂 localfs/                  #   Local filesystem
+│
+├── 📋 logs/                         # Runtime logs (auto-created)
+├── 🐳 Dockerfile
+├── 📦 go.mod
+└── 📖 README.md                     # ← you are here
+```
 
-## 致谢
+<br/>
 
-- [1Panel](https://github.com/1Panel-dev/1Panel) — 现代化 Linux 服务器管理面板
-- [1Panel-dev/mcp-1panel](https://github.com/1Panel-dev/mcp-1panel) — 原始 MCP Server 项目
-- [Model Context Protocol](https://modelcontextprotocol.io/) — MCP 规范
-- [golang.org/x/crypto/ssh](https://pkg.go.dev/golang.org/x/crypto/ssh) — Go SSH 客户端
+<!-- ═══════════════════════════════════════════════════════════════════
+                              TROUBLESHOOTING
+     ═══════════════════════════════════════════════════════════════════ -->
 
----
+<h2>🩺 Troubleshooting</h2>
 
-## License
+<details>
+<summary><b><code>dial tcp :22:</code> SSH error</b></summary>
 
-GNU General Public License v3.0 — 详见 [LICENSE](LICENSE)
+<br/>
 
-本项目基于 GPL-3.0 协议开源。任何修改、分发、衍生作品必须以相同协议开源并保留版权声明。
+CLI default `--ssh-host` is not active. Check:
 
----
+1. `mcp_config.json` includes `--ssh-host`
+2. **Restart the MCP client itself** (not just refresh tools)
+3. Inspect `logs/mcp-1panel-full.log` for `[ssh] defaults set: ...`
 
-## ⭐ Star History
+</details>
+
+<details>
+<summary><b><code>请求参数错误</code> / 1Panel API 400 errors</b></summary>
+
+<br/>
+
+Some 1Panel endpoints validate required fields strictly. This project pre-fills sensible defaults for hot endpoints (`list_databases`, `list_backup_records`, `firewall_status`, `monitor_search`).
+If something still fails, fall back to **`panel_request`** with an explicit payload.
+
+</details>
+
+<details>
+<summary><b><code>Not Found (code: 404)</code> from 1Panel API</b></summary>
+
+<br/>
+
+API paths differ between 1Panel versions. This project targets **v2.0.15**.
+For newer or custom routes, use the universal `panel_request` tool.
+
+</details>
+
+<details>
+<summary><b>Token authentication failed</b></summary>
+
+<br/>
+
+1. Confirm 1Panel API interface is **enabled**
+2. Confirm the client IP is in the **whitelist**
+3. Tokens are case-sensitive — copy the entire string
+
+</details>
+
+<details>
+<summary><b><code>transport error: transport closed</code></b></summary>
+
+<br/>
+
+The MCP client lost the stdio process. Force a restart:
+
+| Client | Action |
+|---|---|
+| **Windsurf** | `Ctrl+Shift+P` → `Reload Window` |
+| **Claude Desktop** | Quit completely, then relaunch |
+| **Cursor** | Restart Cursor |
+
+</details>
+
+<br/>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+                              SECURITY
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<h2>🛡️ Security</h2>
+
+> ⚠️ **This tool grants total control** — full 1Panel admin + remote SSH exec + local shell.
+> Treat it like root credentials.
+
+#### Must do
+
+- 🚫 **Never run** in untrusted or public environments
+- 🚫 **Never commit** tokens / private keys (already gitignored: `*.pem` `*.key`)
+- 🚫 **Avoid `--ssh-password`** in plain config files — use keys
+- ⚠️ **Confirm `[DANGEROUS]`** tagged tools before executing
+
+#### Should do
+
+- 🔐 Store private keys at `~/.ssh/` with `chmod 600`
+- 🔐 Use a dedicated 1Panel API key with IP allow-listing
+- 🔄 Rotate API keys + SSH keys regularly
+- 📜 Use read-only credentials for production where possible
+
+<br/>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+                              CHANGELOG
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<h2>📜 Changelog</h2>
+
+<details open>
+<summary><b>v1.0.0</b> &nbsp;<sub>2026-04</sub> &nbsp;<sub>(click to toggle)</sub></summary>
+
+<br/>
+
+✨ **New**
+
+- `ssh_remote_exec` & `ssh_port_check` — password / key / encrypted-key auth
+- CLI flags `--ssh-host` `--ssh-user` `--ssh-key` `--ssh-password` `--ssh-port` for sticky defaults
+- 90+ tool registry · structured output everywhere
+
+🩹 **Fixes (1Panel v2.0.15)**
+
+- `firewall_status` — adds required `name` field
+- `monitor_search` — auto-fills time window
+- `list_databases` — corrects `orderBy` validation
+- `list_backup_records` — defaults `type`
+- `list_processes` — switches to `/process/:pid` (`/process/listening` removed upstream)
+
+🛠️ **Internal**
+
+- Logs path now resolves next to executable — survives any working directory
+- Removed duplicate tool registrations (`tools/localssh`)
+
+</details>
+
+<br/>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+                              ACKNOWLEDGEMENTS
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<h2>💎 Acknowledgements</h2>
+
+<table>
+<tr>
+<td align="center" width="25%">
+<a href="https://github.com/1Panel-dev/1Panel">
+<img src="https://avatars.githubusercontent.com/u/119326914?s=200&v=4" width="60" height="60"/><br/>
+<b>1Panel</b>
+</a>
+<br/><sub>Modern Linux panel</sub>
+</td>
+<td align="center" width="25%">
+<a href="https://github.com/1Panel-dev/mcp-1panel">
+<img src="https://avatars.githubusercontent.com/u/119326914?s=200&v=4" width="60" height="60"/><br/>
+<b>mcp-1panel</b>
+</a>
+<br/><sub>Original MCP server</sub>
+</td>
+<td align="center" width="25%">
+<a href="https://modelcontextprotocol.io/">
+<img src="https://avatars.githubusercontent.com/u/182288589?s=200&v=4" width="60" height="60"/><br/>
+<b>MCP</b>
+</a>
+<br/><sub>The protocol</sub>
+</td>
+<td align="center" width="25%">
+<a href="https://pkg.go.dev/golang.org/x/crypto/ssh">
+<img src="https://go.dev/images/go-logo-blue.svg" width="60" height="60"/><br/>
+<b>x/crypto/ssh</b>
+</a>
+<br/><sub>SSH client for Go</sub>
+</td>
+</tr>
+</table>
+
+<br/>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+                              LICENSE
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<h2>📄 License</h2>
+
+Released under **GNU General Public License v3.0** — see [LICENSE](LICENSE).
+
+> Any modification, redistribution or derivative work must remain open under the same license and preserve copyright.
+
+<br/>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+                              STAR HISTORY
+     ═══════════════════════════════════════════════════════════════════ -->
 
 <div align="center">
+
+<h2>⭐ Star History</h2>
 
 <a href="https://www.star-history.com/#Aurora100729/mcp-1panel-full&Date">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Aurora100729/mcp-1panel-full&type=Date&theme=dark" />
-    <img src="https://api.star-history.com/svg?repos=Aurora100729/mcp-1panel-full&type=Date" alt="Star History Chart" />
+    <img src="https://api.star-history.com/svg?repos=Aurora100729/mcp-1panel-full&type=Date" />
   </picture>
 </a>
 
 <br/><br/>
 
-<sub>If you find this project useful, please consider giving it a ⭐!</sub>
+<sub><i>If this project saved you a click — give it a ⭐</i></sub>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=120&section=footer" alt="Footer" />
+</div>
+
+<br/>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+                              FOOTER WAVE
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<div align="center">
+
+```diff
+@@  Conversations > Commands.  Intent > Syntax.  AI > Toil.  @@
++ Built with care · Open to all · Made for the curious
+```
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,50:16213e,100:0f3460&height=140&section=footer" />
 
 </div>
