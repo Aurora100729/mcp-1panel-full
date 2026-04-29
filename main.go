@@ -33,7 +33,6 @@ import (
 	"github.com/Aurora100729/mcp-1panel-full/operations/toolbox"
 	"github.com/Aurora100729/mcp-1panel-full/operations/website"
 	"github.com/Aurora100729/mcp-1panel-full/tools/localfs"
-	"github.com/Aurora100729/mcp-1panel-full/tools/localssh"
 	"github.com/Aurora100729/mcp-1panel-full/tools/shell"
 	"github.com/Aurora100729/mcp-1panel-full/utils"
 )
@@ -43,14 +42,18 @@ var (
 )
 
 func setupLogger() (*os.File, error) {
-	logDir := "logs"
+	exePath, err := os.Executable()
+	if err != nil {
+		exePath = "."
+	}
+	logDir := filepath.Join(filepath.Dir(exePath), "logs")
 	if err := os.MkdirAll(logDir, 0755); err != nil {
 		fmt.Printf("create log dir error: %v\n", err)
 		return nil, err
 	}
 
 	logFilePath := filepath.Join(logDir, "mcp-1panel-full.log")
-	logFile, err := os.OpenFile(logFilePath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
+	logFile, err := os.OpenFile(logFilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 	if err != nil {
 		fmt.Printf("open log file error: %v\n", err)
 		return nil, err
@@ -250,10 +253,6 @@ func addTools(s *mcp.Server) {
 		localfs.LocalFileListTool,
 		localfs.LocalFileStatTool,
 		localfs.LocalFileSearchTool,
-
-		// ── SSH Remote Exec ──
-		localssh.SSHExecTool,
-		localssh.SSHPortCheckTool,
 	)
 }
 
