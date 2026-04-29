@@ -6,8 +6,8 @@ import (
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 
-	"github.com/1Panel-dev/mcp-1panel/operations/types"
-	"github.com/1Panel-dev/mcp-1panel/utils"
+	"github.com/Aurora100729/mcp-1panel-full/operations/types"
+	"github.com/Aurora100729/mcp-1panel-full/utils"
 )
 
 const (

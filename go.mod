@@ -1,7 +1,10 @@
-module github.com/1Panel-dev/mcp-1panel
+module github.com/Aurora100729/mcp-1panel-full
 
-go 1.23.0
+go 1.25.0
 
-toolchain go1.23.7
+require (
+	github.com/modelcontextprotocol/go-sdk v0.1.0
+	golang.org/x/crypto v0.50.0
+)
 
-require github.com/modelcontextprotocol/go-sdk v0.1.0
+require golang.org/x/sys v0.43.0 // indirect

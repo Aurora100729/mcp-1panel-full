@@ -13,12 +13,29 @@ import (
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 
-	"github.com/1Panel-dev/mcp-1panel/operations/app"
-	"github.com/1Panel-dev/mcp-1panel/operations/database"
-	"github.com/1Panel-dev/mcp-1panel/operations/ssl"
-	"github.com/1Panel-dev/mcp-1panel/operations/system"
-	"github.com/1Panel-dev/mcp-1panel/operations/website"
-	"github.com/1Panel-dev/mcp-1panel/utils"
+	"github.com/Aurora100729/mcp-1panel-full/operations/app"
+	"github.com/Aurora100729/mcp-1panel-full/operations/backup"
+	"github.com/Aurora100729/mcp-1panel-full/operations/container"
+	"github.com/Aurora100729/mcp-1panel-full/operations/cron"
+	"github.com/Aurora100729/mcp-1panel-full/operations/database"
+	"github.com/Aurora100729/mcp-1panel-full/operations/file"
+	"github.com/Aurora100729/mcp-1panel-full/operations/firewall"
+	"github.com/Aurora100729/mcp-1panel-full/operations/generic"
+	"github.com/Aurora100729/mcp-1panel-full/operations/monitor"
+	"github.com/Aurora100729/mcp-1panel-full/operations/panellog"
+	"github.com/Aurora100729/mcp-1panel-full/operations/process"
+	"github.com/Aurora100729/mcp-1panel-full/operations/runtime"
+	"github.com/Aurora100729/mcp-1panel-full/operations/setting"
+	"github.com/Aurora100729/mcp-1panel-full/operations/snapshot"
+	"github.com/Aurora100729/mcp-1panel-full/operations/sshmanage"
+	"github.com/Aurora100729/mcp-1panel-full/operations/ssl"
+	"github.com/Aurora100729/mcp-1panel-full/operations/system"
+	"github.com/Aurora100729/mcp-1panel-full/operations/toolbox"
+	"github.com/Aurora100729/mcp-1panel-full/operations/website"
+	"github.com/Aurora100729/mcp-1panel-full/tools/localfs"
+	"github.com/Aurora100729/mcp-1panel-full/tools/localssh"
+	"github.com/Aurora100729/mcp-1panel-full/tools/shell"
+	"github.com/Aurora100729/mcp-1panel-full/utils"
 )
 
 var (
@@ -32,7 +49,7 @@ func setupLogger() (*os.File, error) {
 		return nil, err
 	}
 
-	logFilePath := filepath.Join(logDir, "mcp-1panel.log")
+	logFilePath := filepath.Join(logDir, "mcp-1panel-full.log")
 	logFile, err := os.OpenFile(logFilePath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
 	if err != nil {
 		fmt.Printf("open log file error: %v\n", err)
@@ -46,7 +63,7 @@ func setupLogger() (*os.File, error) {
 
 func newMCPServer() *mcp.Server {
 	return mcp.NewServer(
-		"github.com/1Panel-dev/mcp-1panel",
+		"github.com/Aurora100729/mcp-1panel-full",
 		Version,
 		nil,
 	)
@@ -54,17 +71,187 @@ func newMCPServer() *mcp.Server {
 
 func addTools(s *mcp.Server) {
 	s.AddTools(
+		// ── Generic passthrough ──
+		generic.PanelRequestTool,
+
+		// ── System / Dashboard ──
 		system.GetSystemInfoTool,
 		system.GetDashboardInfoTool,
+
+		// ── Website ──
 		website.ListWebsitesTool,
 		website.CreateWebsiteTool,
+		website.DeleteWebsiteTool,
+		website.GetWebsiteConfigTool,
+		website.UpdateWebsiteConfigTool,
+		website.WebsiteOperateTool,
+		website.GetWebsiteHTTPSTool,
+		website.UpdateWebsiteHTTPSTool,
+		website.ListWebsiteDomainsTool,
+		website.CreateWebsiteDomainTool,
+
+		// ── SSL ──
 		ssl.ListSSLsTool,
 		ssl.CreateSSLTool,
+
+		// ── App Store ──
 		app.InstallMySQLTool,
 		app.InstallOpenRestyTool,
 		app.ListInstalledAppsTool,
+		app.AppStoreTool,
+		app.AppDetailTool,
+		app.AppInstalledDetailTool,
+		app.AppOperateTool,
+		app.AppUpdateParamsTool,
+		app.AppInstalledParamsTool,
+
+		// ── Database (MySQL / PostgreSQL / Redis) ──
 		database.ListDatabasesTool,
 		database.CreateDatabaseTool,
+		database.DeleteDatabaseTool,
+		database.DatabaseBackupTool,
+		database.DatabaseStatusTool,
+		database.ListRedisTool,
+		database.RedisStatusTool,
+
+		// ── Container / Docker ──
+		container.ListContainersTool,
+		container.ContainerOperateTool,
+		container.ContainerInspectTool,
+		container.ContainerLogsTool,
+		container.ContainerStatsTool,
+		container.ContainerCreateTool,
+		container.ContainerPruneTool,
+		container.ContainerExecTool,
+
+		// ── Image ──
+		container.ListImagesTool,
+		container.ImagePullTool,
+		container.ImageRemoveTool,
+		container.ImageBuildTool,
+		container.ImagePruneTool,
+
+		// ── Network / Volume ──
+		container.ListNetworksTool,
+		container.CreateNetworkTool,
+		container.DeleteNetworkTool,
+		container.ListVolumesTool,
+		container.CreateVolumeTool,
+		container.DeleteVolumeTool,
+		container.VolumePruneTool,
+
+		// ── Compose ──
+		container.ListComposeTool,
+		container.ComposeUpTool,
+		container.ComposeOperateTool,
+		container.ListComposeTemplatesTool,
+		container.DockerInfoTool,
+		container.DockerSystemPruneTool,
+
+		// ── File Management ──
+		file.ListFilesTool,
+		file.ReadFileTool,
+		file.WriteFileTool,
+		file.CreateFileTool,
+		file.DeleteFileTool,
+		file.MoveFileTool,
+		file.CompressFileTool,
+		file.DecompressFileTool,
+		file.ChmodFileTool,
+		file.WgetFileTool,
+		file.FileSearchContentTool,
+
+		// ── Firewall ──
+		firewall.FirewallStatusTool,
+		firewall.FirewallOperateTool,
+		firewall.ListFirewallRulesTool,
+		firewall.CreateFirewallRuleTool,
+		firewall.DeleteFirewallRuleTool,
+		firewall.ListFirewallIPRulesTool,
+		firewall.CreateFirewallIPRuleTool,
+		firewall.ListFirewallForwardsTool,
+
+		// ── Cron Jobs ──
+		cron.ListCronsTool,
+		cron.CreateCronTool,
+		cron.DeleteCronTool,
+		cron.HandleCronTool,
+		cron.UpdateCronStatusTool,
+
+		// ── Process ──
+		process.ListProcessesTool,
+		process.StopProcessTool,
+
+		// ── SSH Management (1Panel) ──
+		sshmanage.SSHInfoTool,
+		sshmanage.SSHOperateTool,
+		sshmanage.SSHUpdateTool,
+		sshmanage.SSHLogsTool,
+		sshmanage.SSHGenerateKeyTool,
+
+		// ── Logs ──
+		panellog.OperationLogsTool,
+		panellog.LoginLogsTool,
+		panellog.SystemLogsTool,
+
+		// ── Monitor ──
+		monitor.MonitorSearchTool,
+		monitor.MonitorCleanTool,
+
+		// ── Backup ──
+		backup.ListBackupAccountsTool,
+		backup.CreateBackupAccountTool,
+		backup.ListBackupRecordsTool,
+		backup.BackupOperateTool,
+
+		// ── Snapshot ──
+		snapshot.ListSnapshotsTool,
+		snapshot.CreateSnapshotTool,
+		snapshot.RecoverSnapshotTool,
+		snapshot.DeleteSnapshotTool,
+
+		// ── Settings ──
+		setting.GetSettingsTool,
+		setting.UpdateSettingTool,
+		setting.UpdatePasswordTool,
+		setting.UpdatePortTool,
+		setting.PanelUpgradeTool,
+
+		// ── Toolbox ──
+		toolbox.GetDNSTool,
+		toolbox.UpdateDNSTool,
+		toolbox.GetHostsTool,
+		toolbox.UpdateHostsTool,
+		toolbox.GetSwapTool,
+		toolbox.SwapOperateTool,
+		toolbox.GetTimezoneTool,
+		toolbox.Fail2BanStatusTool,
+		toolbox.Fail2BanOperateTool,
+		toolbox.ClamAVScanTool,
+
+		// ── Runtime ──
+		runtime.ListRuntimesTool,
+		runtime.CreateRuntimeTool,
+		runtime.RuntimeOperateTool,
+
+		// ═══════════════════════════════════
+		// ── Local Tools (bypass 1Panel) ──
+		// ═══════════════════════════════════
+
+		// ── Shell Exec ──
+		shell.ShellExecTool,
+
+		// ── Local File System ──
+		localfs.LocalFileReadTool,
+		localfs.LocalFileWriteTool,
+		localfs.LocalFileDeleteTool,
+		localfs.LocalFileListTool,
+		localfs.LocalFileStatTool,
+		localfs.LocalFileSearchTool,
+
+		// ── SSH Remote Exec ──
+		localssh.SSHExecTool,
+		localssh.SSHPortCheckTool,
 	)
 }
 
@@ -72,7 +259,7 @@ func runServer(transport string, addr string) error {
 	mcpServer := newMCPServer()
 	addTools(mcpServer)
 
-	log.Printf("Starting MCP server with transport=%s addr=%s", transport, addr)
+	log.Printf("Starting MCP server (v%s) with transport=%s addr=%s", Version, transport, addr)
 
 	switch strings.ToLower(transport) {
 	case "stdio":
@@ -169,6 +356,11 @@ func main() {
 	flag.StringVar(&accessToken, "token", "", "1Panel api key")
 	flag.StringVar(&host, "host", "", "1Panel host (example:http://127.0.0.1:9999)")
 	flag.Parse()
+
+	logFile, _ := setupLogger()
+	if logFile != nil {
+		defer logFile.Close()
+	}
 
 	if accessToken != "" {
 		utils.SetAccessToken(accessToken)
