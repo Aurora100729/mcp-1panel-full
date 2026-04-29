@@ -135,6 +135,7 @@ Traditional server management means juggling SSH terminals, browser tabs, doc pa
 
 <h2>📖 &nbsp; Compass</h2>
 
+<a href="#-how-it-works">How It Works</a> · 
 <a href="#-tool-catalog">Tool Catalog</a> · 
 <a href="#-quick-start">Quick Start</a> · 
 <a href="#-cli-flags">CLI Flags</a> · 
@@ -147,6 +148,99 @@ Traditional server management means juggling SSH terminals, browser tabs, doc pa
 <a href="#-changelog">Changelog</a>
 
 </div>
+
+<br/>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+                              HOW IT WORKS
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<h2>
+  🏗️ &nbsp; How It Works
+</h2>
+
+> 一句话：**MCP Go SDK 把每个工具暴露给 AI，工具内部用 HTTP 客户端调用 1Panel REST API**。
+
+<table>
+<tr>
+<td valign="top" width="50%">
+
+#### 🧬 Architecture in 30 seconds
+
+```
+  ┌──────────────────────┐
+  │   AI 助手 (Claude /   │
+  │   Windsurf / Cursor)  │
+  └──────────┬────────────┘
+             │ MCP 协议 (JSON-RPC)
+             │ stdio / sse / streamable-http
+  ┌──────────▼────────────┐
+  │   mcp-1panel-full     │  ← 你正在看的项目
+  │  (Go binary, 90+ 工具) │
+  └──┬─────────────┬──────┘
+     │             │
+     │ HTTP API    │ SSH / Shell / FS
+     │             │
+  ┌──▼──────┐  ┌──▼──────────┐
+  │ 1Panel  │  │ 远程主机 /   │
+  │ Server  │  │ 本地系统     │
+  └─────────┘  └─────────────┘
+```
+
+</td>
+<td valign="top" width="50%">
+
+#### 🛠️ Tech Foundation
+
+| 组件 | 技术 |
+|---|---|
+| 语言 | **Go 1.25** — 静态编译、零依赖部署 |
+| MCP 实现 | [`modelcontextprotocol/go-sdk`](https://github.com/modelcontextprotocol/go-sdk) |
+| HTTP 客户端 | `net/http` + 自研 `utils.PanelClient` |
+| SSH | [`golang.org/x/crypto/ssh`](https://pkg.go.dev/golang.org/x/crypto/ssh) — 支持密码 / 私钥 / passphrase / kbd-interactive |
+| 类型系统 | [`jsonschema`](https://json-schema.org/) tag 自动生成工具 schema |
+| 传输层 | stdio · SSE · streamable-http 三模式可切 |
+| 容器化 | 多阶段 Dockerfile，最终镜像 < 20 MB |
+
+</td>
+</tr>
+</table>
+
+#### 🧪 单个工具的内部结构（以 `stop_process` 为例）
+
+```go
+// 1. 定义输入类型 — jsonschema tag 自动生成 AI 可读的 schema
+type StopProcessInput struct {
+    PID int `json:"PID" jsonschema:"process ID to stop/kill"`
+}
+
+// 2. 注册为 MCP 工具
+var StopProcessTool = mcp.NewServerTool[StopProcessInput, any](
+    "stop_process",
+    "[DANGEROUS] Kill/stop a running process by PID",
+    func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[StopProcessInput]) (*mcp.CallToolResultFor[any], error) {
+        // 3. 调用 1Panel REST API
+        client := utils.NewPanelClient("POST", "/process/stop",
+            utils.WithPayload(map[string]interface{}{"PID": params.Arguments.PID}))
+        var result interface{}
+        return client.Request(&result)
+    },
+)
+```
+
+每个工具都遵循三段式：**`Input 类型` → `MCP 注册` → `HTTP 调用`**，结构清晰可复用。
+
+#### 🌐 三种传输模式适用场景
+
+| 模式 | 适用场景 | 性能 |
+|---|---|---|
+| **`stdio`** | 本地 MCP 客户端（Claude Desktop / Windsurf / Cursor） | ⚡⚡⚡ 最快，零网络开销 |
+| **`sse`** | 浏览器或老式 HTTP 客户端 | ⚡⚡ 单向流推送 |
+| **`streamable-http`** | 现代远程客户端（推荐） | ⚡⚡⚡ 双向 HTTP 流 |
+
+<br/>
+
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%" height="3"/>
 
 <br/>
 
