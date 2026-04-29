@@ -352,11 +352,21 @@ func main() {
 		accessToken string
 		host        string
 		addr        string
+		sshHost     string
+		sshUser     string
+		sshKey      string
+		sshPassword string
+		sshPort     int
 	)
 	flag.StringVar(&transport, "transport", "stdio", "Transport type (stdio, sse, streamable-http)")
 	flag.StringVar(&addr, "addr", "http://localhost:8000", "Base URL (host, port, optional path) for HTTP transports")
 	flag.StringVar(&accessToken, "token", "", "1Panel api key")
 	flag.StringVar(&host, "host", "", "1Panel host (example:http://127.0.0.1:9999)")
+	flag.StringVar(&sshHost, "ssh-host", "", "Default SSH host for ssh_remote_exec")
+	flag.StringVar(&sshUser, "ssh-user", "", "Default SSH username for ssh_remote_exec")
+	flag.StringVar(&sshKey, "ssh-key", "", "Default SSH private key path for ssh_remote_exec")
+	flag.StringVar(&sshPassword, "ssh-password", "", "Default SSH password for ssh_remote_exec")
+	flag.IntVar(&sshPort, "ssh-port", 22, "Default SSH port for ssh_remote_exec")
 	flag.Parse()
 
 	logFile, _ := setupLogger()
@@ -370,6 +380,7 @@ func main() {
 	if host != "" {
 		utils.SetHost(host)
 	}
+	sshmanage.SetDefaults(sshHost, sshUser, sshKey, sshPassword, sshPort)
 
 	if err := runServer(transport, addr); err != nil {
 		fmt.Printf("server run error: %v\n", err)

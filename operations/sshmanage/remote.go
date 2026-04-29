@@ -13,12 +13,43 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
+// Default connection settings populated from CLI flags.
+var (
+	DefaultHost     string
+	DefaultUser     string
+	DefaultPort     int
+	DefaultKeyPath  string
+	DefaultPassword string
+)
+
+// SetDefaults configures default SSH connection parameters used when tool arguments are not provided.
+func SetDefaults(host, user, keyPath, password string, port int) {
+	DefaultHost = host
+	DefaultUser = user
+	DefaultKeyPath = keyPath
+	DefaultPassword = password
+	DefaultPort = port
+}
+
 // SSHRemoteExecTool executes a command on a remote host via SSH using password or key auth.
 var SSHRemoteExecTool = mcp.NewServerTool[SSHRemoteExecInput, any](
 	"ssh_remote_exec",
 	"[DANGEROUS] Execute a command on a remote host via SSH. Supports password and key authentication.",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[SSHRemoteExecInput]) (*mcp.CallToolResultFor[any], error) {
 		in := params.Arguments
+		if in.Host == "" {
+			in.Host = DefaultHost
+		}
+		if in.User == "" {
+			in.User = DefaultUser
+		}
+		if in.Password == "" && in.KeyPath == "" && in.KeyContent == "" {
+			in.KeyPath = DefaultKeyPath
+			in.Password = DefaultPassword
+		}
+		if in.Port == 0 {
+			in.Port = DefaultPort
+		}
 		if in.Host == "" || in.User == "" || in.Command == "" {
 			return errResult("host, user, and command are required")
 		}
@@ -107,6 +138,12 @@ var SSHPortCheckTool = mcp.NewServerTool[SSHPortCheckInput, any](
 	"Check if an SSH port is open/reachable on a remote host",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[SSHPortCheckInput]) (*mcp.CallToolResultFor[any], error) {
 		in := params.Arguments
+		if in.Host == "" {
+			in.Host = DefaultHost
+		}
+		if in.Port == 0 {
+			in.Port = DefaultPort
+		}
 		if in.Host == "" {
 			return errResult("host is required")
 		}
