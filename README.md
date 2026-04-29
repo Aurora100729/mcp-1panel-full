@@ -1,12 +1,29 @@
-# mcp-1panel-full
+<div align="center">
 
-[![Go](https://img.shields.io/badge/Go-1.25-00ADD8?logo=go)](https://go.dev/)
-[![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
-[![MCP](https://img.shields.io/badge/Model%20Context%20Protocol-1.0-purple)](https://modelcontextprotocol.io/)
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=200&section=header&text=mcp-1panel-full&fontSize=60&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=AI-Native%20Server%20Management%20via%201Panel%20MCP&descAlignY=58&descSize=18" alt="Header" />
 
-**深度优化版 1Panel MCP Server** — 让 AI 助手（Claude / Windsurf / Cursor）通过自然语言全面操控你的 1Panel 服务器。
+<p>
+  <img src="https://img.shields.io/badge/Go-1.25-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go" />
+  <img src="https://img.shields.io/badge/MCP-1.0-purple?style=for-the-badge&logo=anthropic&logoColor=white" alt="MCP" />
+  <img src="https://img.shields.io/badge/License-GPL%20v3-blue?style=for-the-badge&logo=gnu&logoColor=white" alt="License" />
+  <img src="https://img.shields.io/badge/Tools-90%2B-success?style=for-the-badge&logo=tools&logoColor=white" alt="Tools" />
+</p>
 
-> 基于 [1Panel-dev/mcp-1panel](https://github.com/1Panel-dev/mcp-1panel) 深度重构。工具数量从 **11** 个扩展到 **90+**，覆盖 1Panel v2.0 全量 API + 本地 Shell / 文件系统 / SSH 远程执行。
+<p>
+  <img src="https://img.shields.io/github/stars/Aurora100729/mcp-1panel-full?style=for-the-badge&color=yellow&labelColor=0D1117" alt="Stars" />
+  <img src="https://img.shields.io/github/forks/Aurora100729/mcp-1panel-full?style=for-the-badge&color=blue&labelColor=0D1117" alt="Forks" />
+  <img src="https://img.shields.io/github/issues/Aurora100729/mcp-1panel-full?style=for-the-badge&color=red&labelColor=0D1117" alt="Issues" />
+  <img src="https://img.shields.io/github/last-commit/Aurora100729/mcp-1panel-full?style=for-the-badge&color=green&labelColor=0D1117" alt="Last commit" />
+</p>
+
+<p>
+  <strong>让 AI 助手用自然语言全面操控你的 1Panel 服务器</strong><br/>
+  <sub>Claude · Windsurf · Cursor · 任何 MCP 兼容客户端</sub>
+</p>
+
+</div>
+
+> 🚀 基于 [1Panel-dev/mcp-1panel](https://github.com/1Panel-dev/mcp-1panel) 深度重构。工具数量从 **11** 个扩展到 **90+**，覆盖 1Panel v2.0 全量 API + 本地 Shell / 文件系统 / SSH 远程执行。
 
 ---
 
@@ -23,7 +40,22 @@
 
 ---
 
-## 📑 目录
+## �️ 技术栈
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go" />
+<img src="https://img.shields.io/badge/Model%20Context%20Protocol-512BD4?style=for-the-badge&logo=anthropic&logoColor=white" alt="MCP" />
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+<img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux" />
+<img src="https://img.shields.io/badge/SSH-231F20?style=for-the-badge&logo=openssh&logoColor=white" alt="SSH" />
+<img src="https://img.shields.io/badge/1Panel-005CFF?style=for-the-badge&logo=server&logoColor=white" alt="1Panel" />
+
+</div>
+
+---
+
+## � 目录
 
 - [功能总览](#功能总览)
 - [快速开始](#快速开始)
@@ -408,3 +440,24 @@ transport error: transport closed
 GNU General Public License v3.0 — 详见 [LICENSE](LICENSE)
 
 本项目基于 GPL-3.0 协议开源。任何修改、分发、衍生作品必须以相同协议开源并保留版权声明。
+
+---
+
+## ⭐ Star History
+
+<div align="center">
+
+<a href="https://www.star-history.com/#Aurora100729/mcp-1panel-full&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Aurora100729/mcp-1panel-full&type=Date&theme=dark" />
+    <img src="https://api.star-history.com/svg?repos=Aurora100729/mcp-1panel-full&type=Date" alt="Star History Chart" />
+  </picture>
+</a>
+
+<br/><br/>
+
+<sub>If you find this project useful, please consider giving it a ⭐!</sub>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=120&section=footer" alt="Footer" />
+
+</div>
