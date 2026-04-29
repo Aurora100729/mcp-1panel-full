@@ -33,8 +33,8 @@ var ListDatabasesTool = mcp.NewServerTool[ListDatabasesInput, any](
 				Page:     1,
 				PageSize: 500,
 			},
-			Order:    "null",
-			OrderBy:  "created_at",
+			Order:    "ascending",
+			OrderBy:  "name",
 			Database: database,
 		}
 		databaseListRes := &types.DatabaseListResponse{}

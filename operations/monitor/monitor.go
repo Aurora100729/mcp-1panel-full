@@ -2,6 +2,7 @@ package monitor
 
 import (
 	"context"
+	"time"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 
@@ -17,11 +18,19 @@ var MonitorSearchTool = mcp.NewServerTool[MonitorSearchInput, any](
 		if param == "" {
 			param = "all"
 		}
+		startTime := input.StartTime
+		endTime := input.EndTime
+		if startTime == "" {
+			startTime = time.Now().Add(-1 * time.Hour).Format(time.RFC3339)
+		}
+		if endTime == "" {
+			endTime = time.Now().Format(time.RFC3339)
+		}
 		payload := map[string]interface{}{
 			"param":     param,
 			"info":      input.Info,
-			"startTime": input.StartTime,
-			"endTime":   input.EndTime,
+			"startTime": startTime,
+			"endTime":   endTime,
 		}
 		var result interface{}
 		client := utils.NewPanelClient("POST", "/hosts/monitor/search", utils.WithPayload(payload))

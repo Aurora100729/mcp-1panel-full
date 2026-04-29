@@ -57,10 +57,14 @@ var ListBackupRecordsTool = mcp.NewServerTool[ListBackupRecordsInput, any](
 	"List backup records/history",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[ListBackupRecordsInput]) (*mcp.CallToolResultFor[any], error) {
 		input := params.Arguments
+		bType := input.Type
+		if bType == "" {
+			bType = "app"
+		}
 		payload := map[string]interface{}{
 			"page":     1,
 			"pageSize": 100,
-			"type":     input.Type,
+			"type":     bType,
 			"name":     input.Name,
 			"orderBy":  "name",
 			"order":    "ascending",

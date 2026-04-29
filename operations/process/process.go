@@ -10,24 +10,21 @@ import (
 
 var ListProcessesTool = mcp.NewServerTool[ListProcessesInput, any](
 	"list_processes",
-	"List running processes on the 1Panel server with CPU/memory usage",
+	"Get process info by PID on the 1Panel server. Provide a PID to inspect (default: 1)",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[ListProcessesInput]) (*mcp.CallToolResultFor[any], error) {
-		input := params.Arguments
-		pType := input.Type
-		if pType == "" {
-			pType = "listening"
-		}
-		payload := map[string]interface{}{
-			"type": pType,
+		pid := params.Arguments.PID
+		if pid == "" {
+			pid = "1"
 		}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/process/listening", utils.WithPayload(payload))
+		client := utils.NewPanelClient("GET", "/process/"+pid)
 		return client.Request(&result)
 	},
 )
 
 type ListProcessesInput struct {
-	Type string `json:"type,omitempty" jsonschema:"process type filter"`
+	PID  string `json:"pid,omitempty" jsonschema:"process ID to inspect (default: 1)"`
+	Type string `json:"type,omitempty" jsonschema:"deprecated, ignored"`
 }
 
 var StopProcessTool = mcp.NewServerTool[StopProcessInput, any](

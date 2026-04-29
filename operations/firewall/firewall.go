@@ -12,8 +12,9 @@ var FirewallStatusTool = mcp.NewServerTool[FirewallStatusInput, any](
 	"firewall_status",
 	"Get firewall status (active/inactive) and basic info",
 	func(ctx context.Context, _ *mcp.ServerSession, params *mcp.CallToolParamsFor[FirewallStatusInput]) (*mcp.CallToolResultFor[any], error) {
+		payload := map[string]interface{}{"name": "firewall"}
 		var result interface{}
-		client := utils.NewPanelClient("POST", "/hosts/firewall/base")
+		client := utils.NewPanelClient("POST", "/hosts/firewall/base", utils.WithPayload(payload))
 		return client.Request(&result)
 	},
 )
